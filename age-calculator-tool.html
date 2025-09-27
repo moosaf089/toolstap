@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="favicon_io\favicon-16x16.png" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <style>
+    :root {
+      --blue: #1677ff;
+      --blue-dark: #0f5ed7;
+      --white: #ffffff;
+      --soft: #f5f9ff;
+      --muted: #5b6b8a;
+      --radius: 18px;
+      --shadow: 0 10px 35px rgba(0,0,0,.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: linear-gradient(180deg, var(--soft), #fff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 450px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px;
+      text-align: center;
+      animation: fadeIn 0.8s ease forwards;
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 22px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    input[type="date"] {
+      flex: 1;
+      padding: 12px 14px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    input[type="date"]:focus {
+      border-color: var(--blue-dark);
+      box-shadow: 0 0 0 4px rgba(22, 119, 255, 0.15);
+    }
+
+    button {
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      padding: 14px 22px;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(22, 119, 255, 0.25);
+    }
+
+    .result {
+      margin-top: 26px;
+      padding: 18px;
+      background: var(--soft);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--blue-dark);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+    }
+
+    .result.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 520px) {
+      .card { padding: 22px; }
+      h1 { font-size: 1.4rem; }
+      input[type="date"] { font-size: 0.9rem; }
+      button { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Age Calculator</h1>
+    <p>Enter your birth date to calculate your exact age in years, months, and days.</p>
+
+    <div class="input-group">
+      <input type="date" id="dob" />
+    </div>
+
+    <button id="calcBtn">Calculate Age</button>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("calcBtn");
+    const dobInput = document.getElementById("dob");
+    const resultBox = document.getElementById("result");
+
+    btn.addEventListener("click", () => {
+      const dob = new Date(dobInput.value);
+      if (!dobInput.value) {
+        resultBox.textContent = "⚠️ Please select your date of birth!";
+        resultBox.classList.add("show");
+        return;
+      }
+
+      const today = new Date();
+      let years = today.getFullYear() - dob.getFullYear();
+      let months = today.getMonth() - dob.getMonth();
+      let days = today.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      resultBox.textContent = `🎉 You are ${years} years, ${months} months, and ${days} days old.`;
+      resultBox.classList.add("show");
+    });
+  </script>
+</body>
+</html>

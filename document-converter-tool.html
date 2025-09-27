@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Converter</title>
+  <link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
+  <style>
+    :root {
+      --blue: #1677ff;
+      --blue-dark: #0f5ed7;
+      --white: #ffffff;
+      --soft: #f5f9ff;
+      --muted: #5b6b8a;
+      --radius: 18px;
+      --shadow: 0 10px 35px rgba(0,0,0,.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: linear-gradient(180deg, var(--soft), #fff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 520px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px;
+      text-align: center;
+      animation: fadeIn 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .upload-box {
+      border: 2px dashed var(--blue);
+      padding: 30px;
+      border-radius: var(--radius);
+      background: var(--soft);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .upload-box:hover {
+      background: #e6f0ff;
+      transform: scale(1.02);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .select-group {
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid var(--blue);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    select:focus {
+      border-color: var(--blue-dark);
+      box-shadow: 0 0 0 4px rgba(22,119,255,0.15);
+    }
+
+    .btn {
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      padding: 14px 22px;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(22, 119, 255, 0.25);
+    }
+
+    .result {
+      margin-top: 22px;
+      padding: 16px;
+      background: var(--soft);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--blue-dark);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+    }
+
+    .result.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #downloadBtn {
+      display: none;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 540px) {
+      .card { padding: 24px; }
+      h1 { font-size: 1.5rem; }
+      select, .btn { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Document Converter</h1>
+    <p>Upload a document and convert it to your desired format.</p>
+
+    <label for="fileUpload">
+      <div class="upload-box" id="uploadBox">
+        📄 Click to Upload Document
+      </div>
+    </label>
+    <input type="file" id="fileUpload" accept=".pdf,.docx,.txt" />
+
+    <div class="select-group">
+      <label for="format">Convert To:</label>
+      <select id="format">
+        <option value="pdf">PDF</option>
+        <option value="docx">DOCX</option>
+        <option value="txt">TXT</option>
+      </select>
+    </div>
+
+    <button class="btn" id="convertBtn">Convert Document</button>
+    <button class="btn" id="downloadBtn">⬇️ Download Converted File</button>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const uploadBox = document.getElementById("uploadBox");
+    const fileUpload = document.getElementById("fileUpload");
+    const convertBtn = document.getElementById("convertBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const result = document.getElementById("result");
+
+    let convertedBlob = null;
+
+    uploadBox.addEventListener("click", () => fileUpload.click());
+
+    fileUpload.addEventListener("change", () => {
+      if (fileUpload.files.length > 0) {
+        uploadBox.textContent = `✅ Uploaded: ${fileUpload.files[0].name}`;
+      }
+    });
+
+    convertBtn.addEventListener("click", () => {
+      if (!fileUpload.files.length) {
+        result.textContent = "⚠️ Please upload a document first.";
+        result.classList.add("show");
+        return;
+      }
+
+      const format = document.getElementById("format").value;
+      const fileName = fileUpload.files[0].name.split(".")[0];
+
+      // ⚠️ Fake conversion - creates a text blob
+      const content = `This is a simulated ${format.toUpperCase()} file converted from ${fileUpload.files[0].name}`;
+      convertedBlob = new Blob([content], { type: "text/plain" });
+
+      result.textContent = `📥 Converted "${fileName}" to ${format.toUpperCase()} successfully.`;
+      result.classList.add("show");
+
+      downloadBtn.style.display = "block";
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      if (!convertedBlob) return;
+
+      const format = document.getElementById("format").value;
+      const fileName = fileUpload.files[0].name.split(".")[0] + "." + format;
+
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(convertedBlob);
+      link.download = fileName;
+      link.click();
+    });
+  </script>
+</body>
+</html>
