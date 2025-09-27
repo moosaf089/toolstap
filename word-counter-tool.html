@@ -196,12 +196,18 @@
     paraCount.textContent = `Paragraphs: ${paras}`;
   }
 
-  countBtn.addEventListener('click', updateCounts);
-  textInput.addEventListener('input', updateCounts);
+  countBtn.addEventListener('click', () => {
+    countBtn.style.transform = 'scale(0.95)';
+    setTimeout(() => countBtn.style.transform = 'scale(1)', 150);
+    updateCounts();
+  });
 
   clearBtn.addEventListener('click', () => {
     textInput.value = '';
-    updateCounts();
+    wordCount.textContent = 'Words: 0';
+    charCount.textContent = 'Characters: 0';
+    sentenceCount.textContent = 'Sentences: 0';
+    paraCount.textContent = 'Paragraphs: 0';
   });
 
   copyBtn.addEventListener('click', () => {
@@ -210,8 +216,6 @@
     copyBtn.textContent = "Copied!";
     setTimeout(() => copyBtn.textContent = "Copy Text", 1500);
   });
-
-  updateCounts();
 </script>
 </body>
 </html>
