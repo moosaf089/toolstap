@@ -1,262 +1,292 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" href="favicon_io\favicon-16x16.png" type="image/x-icon">
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Text Case Converter</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Text Case Converter — Tool Tap</title>
+<link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
 <style>
-  :root {
-    --blue: #1677ff;
-    --white: #ffffff;
-    --muted: #5b6b8a;
-    --bg-soft: #eef4ff;
+  :root{
+    --blue:#1677ff; --blue-2:#0f5ed7; --bg:#eef6ff; --muted:#5b6b8a;
+    --white:#fff; --card-radius:16px; --shadow: 0 12px 32px rgba(13,46,98,0.06);
+    --glass: rgba(255,255,255,0.7);
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(#f0f7ff, #ffffff);
-    padding: 16px;
-    display: flex;
-    justify-content: center;
-  }
-  .container {
-    width: 100%;
-    max-width: 900px;
-    background: var(--white);
-    border-radius: 16px;
-    box-shadow: 0 8px 28px rgba(0,0,0,.08);
-    padding: 18px;
-    display: grid;
-    gap: 14px;
-  }
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  h1 {
-    margin: 0;
-    font-size: 1.25rem;
-    color: #fff;
-    background: var(--blue);
-    padding: 10px 14px;
-    border-radius: 10px;
-  }
-  .counts {
-    display: flex;
-    gap: 12px;
-    color: var(--muted);
-    font-size: .95rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  .pane {
-    display: grid;
-    gap: 8px;
-  }
-  label { color: var(--muted); font-weight: 700; }
-  textarea {
-    width: 100%;
-    min-height: 220px;
-    padding: 12px;
-    border: 2px solid var(--blue);
-    border-radius: 12px;
-    resize: vertical;
-    font-size: 15px;
-    line-height: 1.45;
-  }
-  .toolbar {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
-  }
-  button, .ghost-btn {
-    border: none;
-    background: var(--blue);
-    color: #fff;
-    padding: 10px 12px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  .ghost-btn { background: var(--bg-soft); color: var(--muted); }
-  button:disabled { opacity: .6; cursor: not-allowed; }
-  .active { outline: 3px solid #a9c6ff; }
-  .helper {
-    background: var(--bg-soft);
-    color: var(--muted);
-    border-radius: 12px;
-    padding: 10px;
-    font-size: .95rem;
-  }
-  .footer-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-  .toast { position: fixed; bottom: 12px; left: 0; right: 0; margin: auto; width: fit-content; background: #0f5ed7; color:#fff; padding: 8px 12px; border-radius: 10px; opacity: 0; transform: translateY(8px); transition: .25s; }
-  .toast.show { opacity: 1; transform: translateY(0); }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;color:#0b2338}
+  .wrap{max-width:980px;margin:40px auto;padding:22px;background:var(--white);border-radius:var(--card-radius);box-shadow:var(--shadow);animation:cardEnter .5s ease both}
+  @keyframes cardEnter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .header{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+  .brand{background:linear-gradient(90deg,var(--blue),var(--blue-2));color:#fff;padding:10px 14px;border-radius:10px;font-weight:800;box-shadow:0 8px 24px rgba(22,119,255,0.12)}
+  h1{margin:0;font-size:1.25rem}
+  p.lead{margin:4px 0 0;color:var(--muted);font-size:0.95rem}
 
-  @media (max-width: 900px) {
-    .grid { grid-template-columns: 1fr; }
+  .grid{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:18px}
+  @media(max-width:980px){.grid{grid-template-columns:1fr}}
+
+  .left{display:flex;flex-direction:column;gap:12px}
+  textarea.input{
+    width:100%;min-height:220px;padding:14px;border-radius:12px;border:2px solid rgba(22,119,255,0.08);
+    background:#f7fbff;font-size:15px;line-height:1.6;outline:none;transition:box-shadow .18s
   }
-  @media (max-width: 520px) {
-    .toolbar { grid-template-columns: repeat(3, 1fr); }
-    textarea { min-height: 180px; }
+  textarea.input:focus{box-shadow:0 12px 28px rgba(22,119,255,0.08);border-color:var(--blue-2)}
+
+  .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .modes{display:flex;gap:8px;flex-wrap:wrap}
+  .mode-btn{background:transparent;border:2px solid rgba(22,119,255,0.10);padding:10px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-weight:700}
+  .mode-btn.active{background:linear-gradient(90deg,var(--blue),var(--blue-2));color:#fff;border-color:transparent;box-shadow:0 8px 24px rgba(22,119,255,0.12)}
+  .actions{display:flex;gap:8px;align-items:center}
+  .btn{background:var(--blue);color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(22,119,255,0.10)}
+  .btn.ghost{background:transparent;border:2px solid rgba(22,119,255,0.10);color:var(--blue);font-weight:700}
+  .tiny{font-size:0.9rem;color:var(--muted)}
+
+  /* Right panel */
+  .right{display:flex;flex-direction:column;gap:12px}
+  .panel{background:linear-gradient(180deg,#fff,#fbfdff);padding:14px;border-radius:12px;border:1px solid rgba(16,64,160,0.03)}
+  .panel .title{font-weight:800;color:var(--blue-2);margin-bottom:10px}
+  .preview{min-height:160px;max-height:360px;overflow:auto;padding:12px;border-radius:10px;border:1px dashed rgba(22,119,255,0.06);background:#fcfeff;color:#08304f;white-space:pre-wrap}
+  .stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .stat{background:var(--bg);padding:10px;border-radius:10px;min-width:110px;text-align:center;color:var(--blue-2);font-weight:800}
+
+  .actions-bottom{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .link{color:var(--blue);text-decoration:none;font-weight:700}
+
+  .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:0.92rem}
+
+  /* micro animations */
+  .flash{animation:flashC .28s ease}
+  @keyframes flashC{0%{transform:translateY(-6px)}100%{transform:none}}
+
+  @media(max-width:520px){
+    textarea.input{min-height:160px}
+    .brand{display:none}
   }
 </style>
 </head>
 <body>
-  <div class="container" role="application" aria-label="Text Case Converter">
+  <main class="wrap" role="main" aria-labelledby="title">
     <div class="header">
-      <h1>Text Case Converter</h1>
-      <div class="counts" id="counts" aria-live="polite"></div>
-    </div>
-
-    <div class="grid">
-      <div class="pane">
-        <label for="input">Input</label>
-        <textarea id="input" placeholder="Paste or type your text here..."></textarea>
-        <div class="toolbar" aria-label="Case actions">
-          <button id="upperBtn" type="button">UPPERCASE</button>
-          <button id="lowerBtn" type="button">lowercase</button>
-          <button id="titleBtn" type="button">Title Case</button>
-          <button id="sentenceBtn" type="button">Sentence case</button>
-          <button id="toggleBtn" type="button">tOGGLE cASE</button>
-          <button id="clearBtn" class="ghost-btn" type="button">Clear</button>
-        </div>
-        <div class="helper">Tip: pick a conversion, then keep typing. Output updates in real time.</div>
-      </div>
-
-      <div class="pane">
-        <label for="output">Output</label>
-        <textarea id="output" readonly aria-readonly="true" placeholder="Your converted text will appear here."></textarea>
-        <div class="footer-actions">
-          <button id="copyBtn" type="button">Copy Output</button>
-          <button id="swapBtn" class="ghost-btn" type="button" title="Swap input and output">Swap ↔</button>
-        </div>
+      <div class="brand">Tool Tap</div>
+      <div>
+        <h1 id="title">Text Case Converter</h1>
+        <p class="lead">Instantly convert text between Uppercase, Lowercase, Title Case, Sentence Case, or Toggle Case. Copy, clear or download results — matching your Tools Tap theme.</p>
       </div>
     </div>
-  </div>
 
-  <div id="toast" class="toast" role="status" aria-live="polite">Copied!</div>
+    <section class="grid">
+      <!-- Left: editor and controls -->
+      <div class="left" aria-label="Editor">
+        <label for="inputText" class="tiny">Input Text</label>
+        <textarea id="inputText" class="input" placeholder="Paste or type text here..."></textarea>
+
+        <div class="controls" role="toolbar" aria-label="Case controls">
+          <div class="modes" role="tablist" aria-label="Conversion modes">
+            <button class="mode-btn" data-mode="uppercase" id="mUpper">UPPERCASE</button>
+            <button class="mode-btn" data-mode="lowercase" id="mLower">lowercase</button>
+            <button class="mode-btn" data-mode="title" id="mTitle">Title Case</button>
+            <button class="mode-btn" data-mode="sentence" id="mSentence">Sentence case</button>
+            <button class="mode-btn" data-mode="toggle" id="mToggle">Toggle Case</button>
+          </div>
+
+          <div class="actions">
+            <button id="convertBtn" class="btn">Convert</button>
+            <button id="clearBtn" class="btn ghost">Clear</button>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+          <div class="tiny">Tip: select a mode then press Convert. Ctrl+Enter also works.</div>
+          <div style="display:flex;gap:8px">
+            <button id="copyInput" class="btn ghost">Copy Input</button>
+            <button id="downloadInput" class="btn ghost" style="display:none">Download</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: preview and stats -->
+      <aside class="right" aria-label="Preview & actions">
+        <div class="panel" aria-live="polite">
+          <div class="title">Preview</div>
+          <div id="preview" class="preview">Converted text will show here after you press Convert.</div>
+
+          <div class="stats" aria-hidden="false">
+            <div class="stat">Chars <div id="chars" style="font-size:1.1rem;margin-top:6px">0</div></div>
+            <div class="stat">Words <div id="words" style="font-size:1.1rem;margin-top:6px">0</div></div>
+            <div class="stat">Lines <div id="lines" style="font-size:1.1rem;margin-top:6px">0</div></div>
+          </div>
+
+          <div class="actions-bottom">
+            <button id="copyPreview" class="btn ghost">Copy Output</button>
+            <button id="downloadPreviewBtn" class="btn">Download .txt</button>
+            <a id="downloadPreviewLink" style="display:none"></a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="title">How it works</div>
+          <div class="tiny" style="color:var(--muted)">
+            • Uppercase / Lowercase: converts all letters.<br>
+            • Title Case: capitalizes main words (simple heuristic).<br>
+            • Sentence Case: capitalizes after period, question, exclamation.<br>
+            • Toggle Case: switches letter case for each character.
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="footer">Tool Tap © 2025</div>
+  </main>
 
 <script>
-  const $ = (sel) => document.querySelector(sel);
-  const input = $('#input');
-  const output = $('#output');
-  const counts = $('#counts');
-  const toast = $('#toast');
+  // Elements
+  const input = document.getElementById('inputText');
+  const preview = document.getElementById('preview');
+  const convertBtn = document.getElementById('convertBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const copyInputBtn = document.getElementById('copyInput');
+  const copyPreviewBtn = document.getElementById('copyPreview');
+  const downloadPreviewBtn = document.getElementById('downloadPreviewBtn');
+  const downloadPreviewLink = document.getElementById('downloadPreviewLink');
 
-  const btns = {
-    upper: $('#upperBtn'),
-    lower: $('#lowerBtn'),
-    title: $('#titleBtn'),
-    sentence: $('#sentenceBtn'),
-    toggle: $('#toggleBtn'),
-    clear: $('#clearBtn'),
-    copy: $('#copyBtn'),
-    swap: $('#swapBtn')
-  };
+  const modeButtons = document.querySelectorAll('.mode-btn');
+  let selectedMode = 'uppercase'; // default
 
-  let activeMode = null; // 'upper' | 'lower' | 'title' | 'sentence' | 'toggle' | null
+  // Utilities: case conversions
+  function toTitleCase(str){
+    // Basic title case: capitalize words except small stop-words (simple)
+    const small = new Set(['a','an','the','and','or','but','for','nor','on','at','to','from','by','of','in','with']);
+    return str.toLowerCase().split(/(\s+)/).map(token => {
+      if(/\s+/.test(token)) return token;
+      const word = token.replace(/(^[^A-Za-z]*|[^A-Za-z]*$)/g, ''); // trim punctuation edges
+      const rest = token.slice(word.length ? token.indexOf(word)+word.length : 0);
+      if(!word) return token;
+      const lower = word.toLowerCase();
+      if(small.has(lower)) return lower + rest;
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() + rest;
+    }).join('');
+  }
 
-  function updateCounts(text) {
+  function toSentenceCase(str){
+    // Lowercase everything first, then capitalize after sentence endings.
+    const s = str.toLowerCase();
+    // split by sentence enders while keeping them
+    return s.replace(/(^\s*\w|[\.!\?]\s*\w)/g, c => c.toUpperCase());
+  }
+
+  function toToggleCase(str){
+    return Array.from(str).map(ch => {
+      if(ch >= 'a' && ch <= 'z') return ch.toUpperCase();
+      if(ch >= 'A' && ch <= 'Z') return ch.toLowerCase();
+      return ch;
+    }).join('');
+  }
+
+  function countStats(text){
     const chars = text.length;
-    const words = (text.match(/\b\w+\b/g) || []).length;
-    const lines = text.split(/\n/).length;
-    counts.textContent = `${words} words • ${chars} chars • ${lines} lines`;
+    const words = (text.trim() ? (text.match(/\b\S+\b/g) || []).length : 0);
+    const lines = text ? text.split(/\r?\n/).length : 0;
+    return { chars, words, lines };
   }
 
-  function toUpper(str){ return str.toUpperCase(); }
-  function toLower(str){ return str.toLowerCase(); }
-  function toTitle(str){
-    // Simple, robust title case: lowercase then cap first letter of each word
-    return str.toLowerCase().replace(/(^|[^\p{L}\p{N}'])([\p{L}])/gu, (m, p1, p2) => p1 + p2.toUpperCase());
-  }
-  function toSentence(str){
-    const lower = str.toLowerCase();
-    // Capitalize first letter of text and after . ! ? followed by spaces/newlines
-    return lower.replace(/(^\s*[\p{L}]|[\.!?]\s*[\p{L}])/gu, s => s.toUpperCase());
-  }
-  function toToggle(str){
-    let out = '';
-    for (const ch of str) {
-      const up = ch.toUpperCase();
-      const low = ch.toLowerCase();
-      out += ch === up ? low : up;
+  function updatePreviewAndStats(text){
+    preview.textContent = text || 'Converted text will show here after you press Convert.';
+    const s = countStats(text || '');
+    document.getElementById('chars').textContent = s.chars;
+    document.getElementById('words').textContent = s.words;
+    document.getElementById('lines').textContent = s.lines;
+
+    // prepare download link
+    if(text){
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      downloadPreviewLink.href = url;
+      downloadPreviewLink.download = 'converted.txt';
+      downloadPreviewLink.style.display = 'inline';
+    } else {
+      downloadPreviewLink.style.display = 'none';
+      if(downloadPreviewLink.href){ URL.revokeObjectURL(downloadPreviewLink.href); downloadPreviewLink.removeAttribute('href'); }
     }
-    return out;
   }
 
-  const transformers = { upper: toUpper, lower: toLower, title: toTitle, sentence: toSentence, toggle: toToggle };
+  // Mode buttons
+  modeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modeButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedMode = btn.getAttribute('data-mode');
+    });
+  });
+  // set default active
+  document.querySelector('.mode-btn[data-mode="uppercase"]').classList.add('active');
 
-  function applyTransform() {
-    const raw = input.value;
-    updateCounts(raw);
-    if (!activeMode) { output.value = raw; return; }
-    const fn = transformers[activeMode];
-    output.value = fn ? fn(raw) : raw;
-  }
-
-  function setActiveMode(mode){
-    activeMode = mode;
-    // visual state
-    for (const key of ['upper','lower','title','sentence','toggle']) {
-      btns[key].classList.toggle('active', key === mode);
+  // Convert handler
+  function convertAction(){
+    const txt = input.value;
+    if(!txt.trim()){
+      preview.textContent = 'Please enter text to convert.';
+      preview.classList.remove('flash'); void preview.offsetWidth; preview.classList.add('flash');
+      updatePreviewAndStats('');
+      return;
     }
-    applyTransform();
+    let result = '';
+    switch(selectedMode){
+      case 'uppercase': result = txt.toUpperCase(); break;
+      case 'lowercase': result = txt.toLowerCase(); break;
+      case 'title': result = toTitleCase(txt); break;
+      case 'sentence': result = toSentenceCase(txt); break;
+      case 'toggle': result = toToggleCase(txt); break;
+      default: result = txt;
+    }
+    updatePreviewAndStats(result);
+    preview.classList.remove('flash'); void preview.offsetWidth; preview.classList.add('flash');
   }
 
-  // Event wiring
-  input.addEventListener('input', applyTransform);
-  btns.upper.addEventListener('click', () => setActiveMode('upper'));
-  btns.lower.addEventListener('click', () => setActiveMode('lower'));
-  btns.title.addEventListener('click', () => setActiveMode('title'));
-  btns.sentence.addEventListener('click', () => setActiveMode('sentence'));
-  btns.toggle.addEventListener('click', () => setActiveMode('toggle'));
+  convertBtn.addEventListener('click', () => {
+    convertBtn.style.transform = 'scale(0.98)';
+    setTimeout(()=> convertBtn.style.transform = '', 150);
+    convertAction();
+  });
 
-  btns.clear.addEventListener('click', () => {
+  // keyboard shortcut Ctrl+Enter
+  input.addEventListener('keydown', e => {
+    if(e.ctrlKey && e.key === 'Enter') convertAction();
+  });
+
+  clearBtn.addEventListener('click', () => {
     input.value = '';
-    output.value = '';
-    activeMode = null;
-    setActiveMode(null);
-    updateCounts('');
+    updatePreviewAndStats('');
   });
 
-  btns.copy.addEventListener('click', async () => {
-    const text = output.value;
-    if (!text) return;
-    try {
-      await navigator.clipboard.writeText(text);
-      showToast('Copied to clipboard');
-    } catch {
-      // Fallback
-      output.select();
-      document.execCommand('copy');
-      showToast('Copied');
+  copyInput.addEventListener('click', async () => {
+    const v = input.value || '';
+    if(!v) { input.classList.remove('flash'); void input.offsetWidth; input.classList.add('flash'); return; }
+    try{ await navigator.clipboard.writeText(v); copyInput.textContent = 'Copied!'; setTimeout(()=> copyInput.textContent = 'Copy Input', 1200); } catch(e){ copyInput.textContent = 'Copied'; setTimeout(()=> copyInput.textContent = 'Copy Input', 1200); }
+  });
+
+  copyPreviewBtn.addEventListener('click', async () => {
+    const v = preview.textContent || '';
+    if(!v) { preview.classList.remove('flash'); void preview.offsetWidth; preview.classList.add('flash'); return; }
+    try{ await navigator.clipboard.writeText(v); copyPreviewBtn.textContent = 'Copied!'; setTimeout(()=> copyPreviewBtn.textContent = 'Copy Output', 1200); } catch(e){ copyPreviewBtn.textContent = 'Copied'; setTimeout(()=> copyPreviewBtn.textContent = 'Copy Output', 1200); }
+  });
+
+  downloadPreviewBtn.addEventListener('click', () => {
+    const v = preview.textContent || '';
+    if(!v) { preview.classList.remove('flash'); void preview.offsetWidth; preview.classList.add('flash'); return; }
+    // use prepared link or create on the fly
+    if(downloadPreviewLink.href){
+      const a = document.createElement('a'); a.href = downloadPreviewLink.href; a.download = downloadPreviewLink.download || 'converted.txt'; document.body.appendChild(a); a.click(); a.remove();
+    } else {
+      const blob = new Blob([v], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'converted.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
     }
   });
 
-  btns.swap.addEventListener('click', () => {
-    const a = input.value, b = output.value;
-    input.value = b;
-    output.value = a;
-    applyTransform();
-  });
+  // Init empty preview
+  updatePreviewAndStats('');
 
-  function showToast(msg){
-    toast.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 1200);
-  }
-
-  // Initial
-  updateCounts('');
-  applyTransform();
+  // accessibility: focus outline visible
+  input.addEventListener('focus', ()=> input.style.boxShadow = '0 12px 28px rgba(22,119,255,0.08)');
+  input.addEventListener('blur', ()=> input.style.boxShadow = '');
 </script>
 </body>
 </html>
