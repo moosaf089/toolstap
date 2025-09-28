@@ -1,148 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="favicon_io\favicon-16x16.png" type="image/x-icon">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GST Calculator</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GST Calculator | Tool Tap</title>
+<link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
+
 <style>
   :root {
     --blue: #1677ff;
+    --light-blue: #e7f0ff;
     --white: #ffffff;
-    --muted: #5b6b8a;
+    --shadow: rgba(0, 0, 0, 0.12);
   }
+
+  * {
+    box-sizing: border-box;
+    transition: 0.3s ease all;
+  }
+
   body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(#f0f7ff, #ffffff);
     margin: 0;
-    padding: 15px;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #dceeff, #ffffff);
+    min-height: 100vh;
     display: flex;
+    align-items: center;
     justify-content: center;
+    overflow-x: hidden;
   }
+
   .container {
-    background: var(--white);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    max-width: 420px;
-    width: 100%;
-  }
-  h1 {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px var(--shadow);
+    padding: 30px;
+    width: 90%;
+    max-width: 430px;
     text-align: center;
-    background: var(--blue);
-    color: var(--white);
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 1.4rem;
+    animation: fadeUp 0.8s ease;
   }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h2 {
+    color: var(--blue);
+    margin-bottom: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
   label {
-    font-weight: bold;
     display: block;
-    margin-bottom: 5px;
-    color: var(--muted);
+    text-align: left;
+    font-weight: 600;
+    margin: 10px 0 6px;
+    color: #444;
   }
+
   input, select {
     width: 100%;
-    padding: 10px;
-    border: 2px solid var(--blue);
-    border-radius: 8px;
-    font-size: 16px;
-    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid var(--light-blue);
+    background: #f7fbff;
+    font-size: 1rem;
     outline: none;
   }
-  .mode {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 15px;
+
+  input:focus, select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 6px rgba(22, 119, 255, 0.3);
   }
-  .mode label {
-    font-weight: normal;
-    color: var(--muted);
+
+  button {
+    width: 100%;
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-weight: 700;
     cursor: pointer;
-  }
-  .result {
-    background: #eef4ff;
-    padding: 15px;
-    border-radius: 8px;
+    margin-top: 20px;
     font-size: 1rem;
-    color: var(--muted);
-    line-height: 1.5;
   }
-  .highlight {
+
+  button:hover {
+    background: #0f5ed7;
+    transform: scale(1.05);
+  }
+
+  .result {
+    margin-top: 20px;
+    padding: 18px;
+    background: #f0f8ff;
+    border: 2px solid var(--blue);
+    border-radius: 14px;
+    display: none;
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .result h3 {
     color: var(--blue);
-    font-weight: bold;
+    margin-bottom: 10px;
   }
+
+  .amount {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0f5ed7;
+    margin: 5px 0;
+  }
+
   @media (max-width: 500px) {
-    h1 { font-size: 1.2rem; }
-    input, select { font-size: 0.95rem; }
-    .result { font-size: 0.95rem; }
+    .container {
+      padding: 22px;
+    }
+    h2 {
+      font-size: 1.3rem;
+    }
+    input, select, button {
+      font-size: 0.95rem;
+    }
   }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>GST Calculator</h1>
-  
-  <label for="amount">Enter Amount:</label>
-  <input type="number" id="amount" placeholder="Enter amount" min="0">
 
-  <label for="rate">Select GST Rate:</label>
-  <select id="rate">
-    <option value="5">5%</option>
-    <option value="12">12%</option>
-    <option value="18" selected>18%</option>
-    <option value="28">28%</option>
-  </select>
+  <div class="container">
+    <h2>GST Calculator</h2>
 
-  <div class="mode">
-    <label><input type="radio" name="mode" value="exclusive" checked> GST Exclusive</label>
-    <label><input type="radio" name="mode" value="inclusive"> GST Inclusive</label>
+    <label for="amount">Enter Amount</label>
+    <input type="number" id="amount" placeholder="Enter amount">
+
+    <label for="gstRate">Select GST Rate</label>
+    <select id="gstRate">
+      <option value="5">5%</option>
+      <option value="12">12%</option>
+      <option value="18" selected>18%</option>
+      <option value="28">28%</option>
+    </select>
+
+    <label for="type">Calculation Type</label>
+    <select id="type">
+      <option value="exclusive" selected>GST Exclusive (Add GST)</option>
+      <option value="inclusive">GST Inclusive (Remove GST)</option>
+    </select>
+
+    <button id="calcBtn">Calculate</button>
+
+    <div id="result" class="result">
+      <h3>Calculation Result</h3>
+      <div class="amount" id="gstAmount">GST: ₹0.00</div>
+      <div class="amount" id="totalAmount">Total: ₹0.00</div>
+    </div>
   </div>
-
-  <div class="result" id="result">
-    Enter details to calculate GST.
-  </div>
-</div>
 
 <script>
-  const amountInput = document.getElementById('amount');
-  const rateSelect = document.getElementById('rate');
-  const modeRadios = document.querySelectorAll('input[name="mode"]');
-  const resultDiv = document.getElementById('result');
+  document.getElementById("calcBtn").addEventListener("click", () => {
+    const amount = parseFloat(document.getElementById("amount").value);
+    const gstRate = parseFloat(document.getElementById("gstRate").value);
+    const type = document.getElementById("type").value;
 
-  [amountInput, rateSelect, ...modeRadios].forEach(el => {
-    el.addEventListener('input', calculateGST);
-  });
-
-  function calculateGST() {
-    const amount = parseFloat(amountInput.value);
-    const rate = parseFloat(rateSelect.value);
-    const mode = document.querySelector('input[name="mode"]:checked').value;
+    const resultBox = document.getElementById("result");
+    const gstAmount = document.getElementById("gstAmount");
+    const totalAmount = document.getElementById("totalAmount");
 
     if (!amount || amount <= 0) {
-      resultDiv.textContent = "Please enter a valid amount.";
+      alert("Please enter a valid amount");
       return;
     }
 
-    let gstAmount, totalAmount, baseAmount;
+    let gstValue = 0, total = 0;
 
-    if (mode === "exclusive") {
-      gstAmount = (amount * rate) / 100;
-      totalAmount = amount + gstAmount;
-      baseAmount = amount;
-    } else { 
-      gstAmount = (amount * rate) / (100 + rate);
-      baseAmount = amount - gstAmount;
-      totalAmount = amount;
+    if (type === "exclusive") {
+      gstValue = (amount * gstRate) / 100;
+      total = amount + gstValue;
+    } else {
+      gstValue = (amount * gstRate) / (100 + gstRate);
+      total = amount - gstValue;
     }
 
-    resultDiv.innerHTML = `
-      Base Amount: <span class="highlight">₹${baseAmount.toFixed(2)}</span><br>
-      GST Amount (@${rate}%): <span class="highlight">₹${gstAmount.toFixed(2)}</span><br>
-      Total Amount: <span class="highlight">₹${totalAmount.toFixed(2)}</span>
-    `;
-  }
+    gstAmount.textContent = `GST Amount: ₹${gstValue.toFixed(2)}`;
+    totalAmount.textContent = `Total Amount: ₹${total.toFixed(2)}`;
+    resultBox.style.display = "block";
+  });
 </script>
+
 </body>
 </html>
