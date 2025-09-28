@@ -1,456 +1,186 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Scientific Calculator — Tool Tap</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Calculator | Tool Tap</title>
 <link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
 <style>
-  :root{
-    --blue:#1677ff; --blue-2:#0f5ed7; --bg:#eef6ff; --muted:#64748b;
-    --card:#ffffff; --radius:14px; --shadow: 0 14px 40px rgba(13,46,98,0.07);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#fff);color:#0b2338}
-  .wrap{max-width:980px;margin:36px auto;padding:20px;background:var(--card);border-radius:16px;box-shadow:var(--shadow);animation:cardIn .45s ease both}
-  @keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  .header{display:flex;gap:12px;align-items:center;margin-bottom:12px}
-  .brand{background:linear-gradient(90deg,var(--blue),var(--blue-2));color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;box-shadow:0 6px 18px rgba(22,119,255,0.12)}
-  h1{margin:0;font-size:1.25rem}
-  .lead{color:var(--muted);font-size:0.95rem;margin-top:4px}
-
-  .grid{
-    display:grid;
-    grid-template-columns: 1fr 320px;
-    gap:18px;
-  }
-  @media(max-width:980px){ .grid{grid-template-columns:1fr} }
-
-  /* calculator left */
-  .calc {
-    display:flex;flex-direction:column;gap:12px;
+  :root {
+    --blue: #1677ff;
+    --white: #ffffff;
+    --bg: #f0f7ff;
+    --shadow: rgba(0,0,0,0.1);
   }
 
-  .display {
-    background:linear-gradient(180deg,#fff,#f7fbff);
-    border-radius:12px;padding:14px;border:1px solid rgba(22,119,255,0.06);
-    box-shadow:0 8px 24px rgba(22,119,255,0.04);
-  }
-  .expr {
-    font-size:0.95rem;color:var(--muted);min-height:20px;word-break:break-all;
-  }
-  .result {
-    font-size:1.6rem;font-weight:800;color:var(--blue-2);margin-top:6px;
+  * {
+    box-sizing: border-box;
   }
 
-  .row { display:flex; gap:8px; }
-  .btn {
-    flex:1;padding:12px;border-radius:10px;border:none;background:linear-gradient(180deg,var(--blue),var(--blue-2));
-    color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(22,119,255,0.12);transition:transform .12s,box-shadow .12s;
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #dceeff, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
-  .btn:active{transform:translateY(2px)}
-  .btn.ghost { background:transparent;color:var(--blue-2);border:1px solid rgba(22,119,255,0.12);box-shadow:none }
-  .btn.func { background:linear-gradient(180deg,#fff,#f8fbff); color:var(--blue-2); border:1px solid rgba(22,119,255,0.08); font-weight:700; box-shadow:0 6px 16px rgba(22,119,255,0.04) }
-  .btn.large { padding:14px 18px; font-size:1rem }
 
-  .keys { display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; }
-  .key { padding:14px;border-radius:10px;border:1px solid rgba(16,64,160,0.04); background:#fff; text-align:center; font-weight:700; cursor:pointer; box-shadow:0 6px 18px rgba(13,46,98,0.03); transition:transform .08s }
-  .key:active{transform:translateY(2px)}
-  .key.op { color:var(--blue-2) }
-  .key.fn { color:#0a2540; background:linear-gradient(180deg,#fbfdff,#fff) }
+  .calculator {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow);
+    width: 360px;
+    padding: 20px;
+    animation: fadeIn 0.8s ease-in-out;
+  }
 
-  /* right panel */
-  .panel { background:linear-gradient(180deg,#fff,#fbfdff); padding:14px; border-radius:12px; border:1px solid rgba(16,64,160,0.03) }
-  .panel .title { font-weight:800; color:var(--blue-2); margin-bottom:8px }
-  .modes { display:flex; gap:8px; margin-bottom:12px }
-  .toggle { padding:8px 10px; border-radius:10px; border:1px solid rgba(22,119,255,0.08); background:#fff; cursor:pointer }
-  .mem { display:flex; gap:8px; flex-wrap:wrap }
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
 
-  .preview { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Courier New', monospace; background:#fcfeff;padding:12px;border-radius:10px;border:1px dashed rgba(22,119,255,0.06); min-height:90px; overflow:auto; white-space:pre-wrap }
-  .small { font-size:0.9rem; color:var(--muted) }
+  h2 {
+    text-align: center;
+    color: var(--blue);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
 
-  .footer { margin-top:14px; text-align:center; color:var(--muted); font-size:0.9rem }
+  #display {
+    width: 100%;
+    height: 60px;
+    border: none;
+    background: #f5f9ff;
+    border-radius: 10px;
+    text-align: right;
+    padding: 10px 15px;
+    font-size: 1.4rem;
+    color: #333;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+  }
 
-  @media(max-width:520px){
-    .brand{display:none}
-    .result{font-size:1.3rem}
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+
+  button {
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: var(--blue);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    background: #125edb;
+  }
+
+  button.operator {
+    background: #4c9aff;
+  }
+
+  button.clear {
+    background: #ff4747;
+  }
+
+  button.equal {
+    background: #00c851;
+  }
+
+  @media (max-width: 480px) {
+    .calculator {
+      width: 90%;
+    }
+    button {
+      font-size: 0.9rem;
+      padding: 12px;
+    }
   }
 </style>
 </head>
 <body>
-  <main class="wrap" role="main" aria-labelledby="title">
-    <div class="header">
-      <div class="brand">Tool Tap</div>
-      <div>
-        <h1 id="title">Scientific Calculator</h1>
-        <div class="lead">Basic arithmetic + scientific functions — degrees/radians toggle, memory and keyboard support.</div>
-      </div>
+  <div class="calculator">
+    <h2>Scientific Calculator</h2>
+    <input type="text" id="display" readonly placeholder="0" />
+
+    <div class="buttons">
+      <button class="clear">C</button>
+      <button>(</button>
+      <button>)</button>
+      <button class="operator">^</button>
+      <button class="operator">%</button>
+
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button class="operator">/</button>
+      <button class="operator">√</button>
+
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button class="operator">*</button>
+      <button class="operator">sin</button>
+
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button class="operator">-</button>
+      <button class="operator">cos</button>
+
+      <button>0</button>
+      <button>.</button>
+      <button class="equal">=</button>
+      <button class="operator">+</button>
+      <button class="operator">tan</button>
     </div>
+  </div>
 
-    <div class="grid">
-      <!-- left: calculator -->
-      <section class="calc" aria-label="Calculator">
-        <div class="display" role="status" aria-live="polite">
-          <div class="expr" id="expression" aria-label="Expression"></div>
-          <div class="result" id="result">0</div>
-        </div>
+  <script>
+    const display = document.getElementById("display");
+    const buttons = document.querySelectorAll("button");
 
-        <div class="row">
-          <button class="btn ghost" id="mc">MC</button>
-          <button class="btn ghost" id="mr">MR</button>
-          <button class="btn ghost" id="mPlus">M+</button>
-          <button class="btn ghost" id="mMinus">M-</button>
-        </div>
+    let expression = "";
 
-        <div class="row">
-          <button class="btn func" data-insert="(">(</button>
-          <button class="btn func" data-insert=")">)</button>
-          <button class="btn func" id="backspace">⌫</button>
-          <button class="btn func" id="clear">C</button>
-        </div>
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const value = btn.textContent;
 
-        <div class="keys" id="keys">
-          <!-- row of keys -->
-          <button class="key fn" data-insert="sin(">sin</button>
-          <button class="key fn" data-insert="cos(">cos</button>
-          <button class="key fn" data-insert="tan(">tan</button>
-          <button class="key op" data-insert="^">^</button>
-
-          <button class="key fn" data-insert="asin(">asin</button>
-          <button class="key fn" data-insert="acos(">acos</button>
-          <button class="key fn" data-insert="atan(">atan</button>
-          <button class="key op" data-insert="%">%</button>
-
-          <button class="key" data-insert="7">7</button>
-          <button class="key" data-insert="8">8</button>
-          <button class="key" data-insert="9">9</button>
-          <button class="key op" data-insert="/">÷</button>
-
-          <button class="key" data-insert="4">4</button>
-          <button class="key" data-insert="5">5</button>
-          <button class="key" data-insert="6">6</button>
-          <button class="key op" data-insert="*">×</button>
-
-          <button class="key" data-insert="1">1</button>
-          <button class="key" data-insert="2">2</button>
-          <button class="key" data-insert="3">3</button>
-          <button class="key op" data-insert="-">−</button>
-
-          <button class="key" data-insert="0">0</button>
-          <button class="key" data-insert=".">.</button>
-          <button class="key fn" data-insert="sqrt(">√</button>
-          <button class="key op" data-insert="+">+</button>
-
-          <button class="key fn" data-insert="log(">log</button>
-          <button class="key fn" data-insert="ln(">ln</button>
-          <button class="key fn" data-insert="exp(">exp</button>
-          <button class="key fn" data-insert="pow(">pow</button>
-        </div>
-
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="btn large" id="equals">=</button>
-          <button class="btn ghost large" id="copy">Copy</button>
-          <button class="btn ghost large" id="download">Download</button>
-        </div>
-      </section>
-
-      <!-- right: panel -->
-      <aside>
-        <div class="panel">
-          <div class="title">Mode</div>
-          <div class="modes" role="radiogroup" aria-label="Angle mode">
-            <button class="toggle" id="deg">DEG</button>
-            <button class="toggle" id="rad">RAD</button>
-          </div>
-
-          <div style="margin-top:12px">
-            <div class="title">Memory</div>
-            <div class="mem small" id="memDisplay">Memory: <strong id="memVal">0</strong></div>
-          </div>
-
-          <div style="margin-top:12px">
-            <div class="title">Last evaluation</div>
-            <div class="preview" id="lastEval">No evaluations yet</div>
-          </div>
-
-          <div style="margin-top:12px" class="small">
-            Tip: use `^` for powers (e.g. 2^3), `pow(a,b)` works too. Press Ctrl+Enter to evaluate. Trig uses selected angle mode.
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <div class="footer">Tool Tap © 2025</div>
-  </main>
-
-<script>
-  // Elements
-  const exprEl = document.getElementById('expression');
-  const resEl = document.getElementById('result');
-  const keys = document.getElementById('keys');
-  const equalsBtn = document.getElementById('equals');
-  const clearBtn = document.getElementById('clear');
-  const backspaceBtn = document.getElementById('backspace');
-  const copyBtn = document.getElementById('copy');
-  const downloadBtn = document.getElementById('download');
-  const degBtn = document.getElementById('deg');
-  const radBtn = document.getElementById('rad');
-  const lastEval = document.getElementById('lastEval');
-
-  const mc = document.getElementById('mc'), mr = document.getElementById('mr'), mPlus = document.getElementById('mPlus'), mMinus = document.getElementById('mMinus');
-  const memValEl = document.getElementById('memVal');
-
-  let expression = '';
-  let lastResult = '';
-  let memory = 0;
-  let angleMode = 'DEG'; // or RAD
-
-  // helpers
-  function setExpression(s){
-    expression = s;
-    exprEl.textContent = s || '\u00A0';
-  }
-  function appendToExpression(s){
-    expression += s;
-    setExpression(expression);
-  }
-
-  // insert buttons
-  keys.addEventListener('click', (e)=>{
-    const btn = e.target.closest('[data-insert]');
-    if(!btn) return;
-    const toInsert = btn.getAttribute('data-insert') || '';
-    appendToExpression(toInsert);
-  });
-
-  // function buttons
-  document.querySelectorAll('.btn.func[data-insert]').forEach(b => {
-    b.addEventListener('click', ()=> appendToExpression(b.getAttribute('data-insert')));
-  });
-
-  // clear/backspace
-  clearBtn.addEventListener('click', ()=> {
-    setExpression('');
-    resEl.textContent = '0';
-  });
-  backspaceBtn.addEventListener('click', ()=> {
-    expression = expression.slice(0, -1);
-    setExpression(expression);
-  });
-
-  // memory
-  function updateMemDisplay(){ memValEl.textContent = Number(memory).toString(); }
-  mc.addEventListener('click', ()=> { memory = 0; updateMemDisplay(); });
-  mr.addEventListener('click', ()=> { appendToExpression(String(memory)); });
-  mPlus.addEventListener('click', ()=> {
-    const val = parseFloat(lastResult) || 0; memory += val; updateMemDisplay();
-  });
-  mMinus.addEventListener('click', ()=> {
-    const val = parseFloat(lastResult) || 0; memory -= val; updateMemDisplay();
-  });
-
-  // angle mode toggle
-  function setMode(mode){
-    angleMode = mode;
-    degBtn.style.boxShadow = mode === 'DEG' ? '0 6px 18px rgba(22,119,255,0.12)' : 'none';
-    radBtn.style.boxShadow = mode === 'RAD' ? '0 6px 18px rgba(22,119,255,0.12)' : 'none';
-  }
-  degBtn.addEventListener('click', ()=> setMode('DEG'));
-  radBtn.addEventListener('click', ()=> setMode('RAD'));
-  setMode('DEG');
-
-  // click equals
-  equalsBtn.addEventListener('click', evaluateAndShow);
-
-  // keyboard support
-  window.addEventListener('keydown', (e)=>{
-    if(e.ctrlKey && e.key === 'Enter'){ evaluateAndShow(); e.preventDefault(); return; }
-    if(e.key === 'Backspace'){ expression = expression.slice(0,-1); setExpression(expression); e.preventDefault(); return; }
-    // allow number/operator keys
-    const allowed = '0123456789+-*/().^%';
-    if(allowed.includes(e.key)){
-      appendToExpression(e.key); e.preventDefault(); return;
-    }
-    if(e.key === 'Enter'){ evaluateAndShow(); e.preventDefault(); return; }
-  });
-
-  // evaluate expression safely-ish
-  function evaluateExpression(input){
-    if(!input || !input.trim()) return '';
-    let expr = String(input);
-
-    // Basic sanitization: allow digits, letters, operators, parentheses, dot, comma, spaces
-    if(!/^[0-9+\-*/^().,%\sA-Za-z_]+$/.test(expr)) throw new Error('Invalid characters in expression');
-
-    // replace percent: e.g. 50% -> (50/100)
-    expr = expr.replace(/(\d+(\.\d+)?)%/g, '($1/100)');
-
-    // replace pow(a,b) with Math.pow(a,b)
-    expr = expr.replace(/\bpow\s*\(/gi, 'Math.pow(');
-
-    // map simple functions to Math equivalents, handling degrees when necessary
-    // handle sin, cos, tan, asin, acos, atan, sqrt, log, ln, exp, abs
-    // We'll try to replace occurrences like sin(x) with Math.sin(x) or Math.sin(x*PI/180) for degrees.
-    const fnList = ['sin','cos','tan','asin','acos','atan','sqrt','abs','exp'];
-    fnList.forEach(fn => {
-      const re = new RegExp('\\b' + fn + '\\s*\\(', 'gi');
-      if(['sin','cos','tan','asin','acos','atan'].includes(fn) && angleMode === 'DEG'){
-        // replace sin( ... ) with Math.sin((...)*Math.PI/180)
-        // This naive regex only handles non-nested single arg content fairly well.
-        expr = expr.replace(new RegExp(fn + '\\s*\\(([^()]+)\\)', 'gi'), (m, p1) => {
-          // p1 is inner content without parentheses
-          const conv = `(${p1})*(${Math.PI}/180)`;
-          return `Math.${fn}(${conv})`;
-        });
-        // For cases with nested parentheses, fallback to prefix replacement (less safe)
-        expr = expr.replace(re, 'Math.' + fn + '(');
-      } else {
-        expr = expr.replace(re, 'Math.' + fn + '(');
-      }
+        if (value === "C") {
+          expression = "";
+          display.value = "";
+        } 
+        else if (value === "=") {
+          try {
+            const replaced = expression
+              .replace(/√/g, "Math.sqrt")
+              .replace(/sin/g, "Math.sin")
+              .replace(/cos/g, "Math.cos")
+              .replace(/tan/g, "Math.tan")
+              .replace(/\^/g, "**");
+            display.value = eval(replaced);
+            expression = display.value;
+          } catch {
+            display.value = "Error";
+            expression = "";
+          }
+        } 
+        else {
+          expression += value;
+          display.value = expression;
+        }
+      });
     });
-
-    // log base 10
-    expr = expr.replace(/\blog\s*\(/gi, 'Math.log10 ? Math.log10(' : 'Math.log(');
-    // try to use Math.log10 if available, else implement
-    if(typeof Math.log10 !== 'function'){
-      expr = expr.replace(/\bMath\.log10\(/g, '(Math.log(');
-      // we'll convert Math.log(x)/Math.LN10 by adding division at close parentheses — risky to inject; instead convert pattern log10(x) earlier not needed
-    }
-
-    // ln() -> Math.log()
-    expr = expr.replace(/\bln\s*\(/gi, 'Math.log(');
-
-    // replace '^' with ** for exponentiation — JS supports **; use parentheses to be safe
-    expr = expr.replace(/\^/g, '**');
-
-    // Replace '×' and '÷' visual symbols if present
-    expr = expr.replace(/×/g, '*').replace(/÷/g, '/');
-
-    // Remove accidental repeated operators (like -- -> +) handled by JS evaluation
-    // Final safety check: only allowed tokens remain
-    if(!/^[0-9+\-*/%().,*\sA-Za-zMathPIpowMathlogMathpow\*]*$/.test(expr) && !expr) {
-      // don't block aggressively; try evaluation
-    }
-
-    // Evaluate using Function
-    try{
-      // eslint-disable-next-line no-new-func
-      const fn = new Function('return (' + expr + ')');
-      const val = fn();
-      if(typeof val === 'number' && !isFinite(val)) throw new Error('Result is not finite');
-      return val;
-    }catch(err){
-      // last fallback: try replace Math.log10 occurrences to /Math.LN10 if needed
-      try {
-        const alt = expr.replace(/Math\.log10\(/g, '(Math.log(').replace(/\)\s*/g, ')/Math.LN10)');
-        // eslint-disable-next-line no-new-func
-        const fn2 = new Function('return (' + alt + ')');
-        const val2 = fn2();
-        if(typeof val2 === 'number' && !isFinite(val2)) throw new Error('Result not finite');
-        return val2;
-      }catch(e){
-        throw new Error('Could not evaluate expression');
-      }
-    }
-  }
-
-  // main evaluation handler
-  function evaluateAndShow(){
-    const expr = expression;
-    if(!expr.trim()) { flashResult(''); return; }
-    try{
-      const value = evaluateExpression(expr);
-      lastResult = (value === undefined || value === null) ? '' : String(value);
-      resEl.textContent = lastResult;
-      lastEval.textContent = `${expr} = ${lastResult}`;
-      // store last result
-      updateLastEvalStorage(expr, lastResult);
-    }catch(err){
-      resEl.textContent = 'Error';
-      lastEval.textContent = err.message || 'Invalid expression';
-    }
-  }
-
-  function flashResult(msg){
-    resEl.textContent = msg || '0';
-    resEl.classList.remove('flash');
-    void resEl.offsetWidth;
-    resEl.classList.add('flash');
-  }
-
-  // copy and download
-  copyBtn.addEventListener('click', async ()=>{
-    const text = resEl.textContent || '';
-    if(!text) return;
-    try { await navigator.clipboard.writeText(text); copyBtn.textContent = 'Copied!'; setTimeout(()=> copyBtn.textContent = 'Copy', 1100); } catch(e){/*ignore*/ }
-  });
-
-  downloadBtn.addEventListener('click', ()=>{
-    const text = lastEval.textContent || '';
-    if(!text) { flashResult(''); return; }
-    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'calc-result.txt';
-    document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
-  });
-
-  // store last eval in localStorage
-  function updateLastEvalStorage(expr, result){
-    try {
-      const item = { expr, result, time: new Date().toISOString() };
-      localStorage.setItem('tooltap_last_eval', JSON.stringify(item));
-    } catch(e){}
-  }
-  // load last eval
-  try {
-    const stored = JSON.parse(localStorage.getItem('tooltap_last_eval') || 'null');
-    if(stored) lastEval.textContent = `${stored.expr} = ${stored.result}`;
-  } catch(e){}
-
-  // keyboard: allow numbers/operators typed directly
-  // (handled earlier) but also support clicking keys with mouse
-  // setExpression initial
-  setExpression('');
-  resEl.textContent = '0';
-
-  // attach function insert for function buttons (like sin, cos)
-  document.querySelectorAll('[data-insert]').forEach(btn=>{
-    btn.addEventListener('click', ()=> {
-      const v = btn.getAttribute('data-insert') || '';
-      appendToExpression(v);
-    });
-  });
-
-  // allow Ctrl+L to clear
-  window.addEventListener('keydown', (e)=>{
-    if(e.ctrlKey && e.key.toLowerCase() === 'l'){ setExpression(''); resEl.textContent='0'; e.preventDefault(); }
-  });
-
-  // simple flash for result
-  function flash(el){
-    el.classList.remove('flash');
-    void el.offsetWidth;
-    el.classList.add('flash');
-  }
-
-  // set mode UI
-  setMode('DEG');
-
-  // convenience: clicking the expression copies it into clipboard
-  exprEl.addEventListener('click', async ()=>{
-    if(!expression) return;
-    try { await navigator.clipboard.writeText(expression); flashResult('Copied expr'); setTimeout(()=> flashResult(''),900); } catch(e){}
-  });
-
-  // small UX: when last result stored, allow M+ etc to use lastResult
-  // already used.
-
-  // Handle quick paste from clipboard into expression (Ctrl+V will work via focused element)
-  // done.
-
-  // End of script
-</script>
+  </script>
 </body>
 </html>
