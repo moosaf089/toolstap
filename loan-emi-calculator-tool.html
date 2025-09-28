@@ -13,9 +13,7 @@
     --shadow: rgba(0, 0, 0, 0.15);
   }
 
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
   body {
     margin: 0;
@@ -33,7 +31,7 @@
     border-radius: 18px;
     padding: 25px;
     width: 90%;
-    max-width: 450px;
+    max-width: 470px;
     text-align: center;
     animation: fadeIn 0.8s ease-in-out;
   }
@@ -68,7 +66,7 @@
     transition: border 0.3s ease;
   }
 
-  input:focus {
+  input:focus, select:focus {
     border-color: var(--blue);
   }
 
@@ -120,7 +118,7 @@
 
   @media (max-width: 500px) {
     .container { padding: 20px; }
-    input, button { font-size: 0.95rem; }
+    input, button, select { font-size: 0.95rem; }
   }
 </style>
 </head>
@@ -128,14 +126,27 @@
   <div class="container">
     <h2>Loan EMI Calculator</h2>
 
-    <label for="amount">Loan Amount (PKR)</label>
+    <label for="currency">Select Currency</label>
+    <select id="currency">
+      <option value="PKR">🇵🇰 PKR (₨)</option>
+      <option value="USD">🇺🇸 USD ($)</option>
+      <option value="EUR">🇪🇺 EUR (€)</option>
+      <option value="GBP">🇬🇧 GBP (£)</option>
+      <option value="INR">🇮🇳 INR (₹)</option>
+      <option value="AUD">🇦🇺 AUD (A$)</option>
+      <option value="CAD">🇨🇦 CAD (C$)</option>
+      <option value="SAR">🇸🇦 SAR (﷼)</option>
+      <option value="AED">🇦🇪 AED (د.إ)</option>
+    </select>
+
+    <label for="amount">Loan Amount</label>
     <input type="number" id="amount" placeholder="Enter loan amount" />
 
     <label for="rate">Interest Rate (%)</label>
     <input type="number" id="rate" placeholder="Enter annual interest rate" />
 
-    <label for="tenure">Loan Tenure</label>
-    <input type="number" id="tenure" placeholder="Enter tenure (in months)" />
+    <label for="tenure">Loan Tenure (in months)</label>
+    <input type="number" id="tenure" placeholder="Enter tenure" />
 
     <button id="calculateBtn">Calculate EMI</button>
 
@@ -148,6 +159,18 @@
   </div>
 
 <script>
+  const currencySymbols = {
+    "PKR": "₨",
+    "USD": "$",
+    "EUR": "€",
+    "GBP": "£",
+    "INR": "₹",
+    "AUD": "A$",
+    "CAD": "C$",
+    "SAR": "﷼",
+    "AED": "د.إ"
+  };
+
   const calculateBtn = document.getElementById('calculateBtn');
   const resultBox = document.getElementById('result');
   const emiField = document.getElementById('emi');
@@ -158,19 +181,21 @@
     const amount = parseFloat(document.getElementById('amount').value);
     const rate = parseFloat(document.getElementById('rate').value) / 12 / 100;
     const tenure = parseFloat(document.getElementById('tenure').value);
+    const currency = document.getElementById('currency').value;
 
     if (!amount || !rate || !tenure) {
-      alert("Please enter all values!");
+      alert("Please enter all fields!");
       return;
     }
 
     const emi = (amount * rate * Math.pow(1 + rate, tenure)) / (Math.pow(1 + rate, tenure) - 1);
     const totalPayment = emi * tenure;
     const totalInterest = totalPayment - amount;
+    const symbol = currencySymbols[currency] || "";
 
-    emiField.textContent = `PKR ${emi.toFixed(2)}`;
-    totalInterestField.textContent = `PKR ${totalInterest.toFixed(2)}`;
-    totalPaymentField.textContent = `PKR ${totalPayment.toFixed(2)}`;
+    emiField.textContent = `${symbol} ${emi.toFixed(2)}`;
+    totalInterestField.textContent = `${symbol} ${totalInterest.toFixed(2)}`;
+    totalPaymentField.textContent = `${symbol} ${totalPayment.toFixed(2)}`;
 
     resultBox.style.display = 'block';
     resultBox.style.animation = "fadeSlide 0.6s ease";
