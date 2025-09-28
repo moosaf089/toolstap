@@ -1,75 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Currency Converter | Tool Tap</title>
 <link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
 
 <style>
   :root {
     --blue: #1677ff;
-    --light-blue: #e7f0ff;
     --white: #ffffff;
-    --shadow: rgba(0, 0, 0, 0.12);
+    --light-blue: #eaf3ff;
   }
 
   * {
     box-sizing: border-box;
-    transition: 0.3s ease all;
+    transition: all 0.3s ease;
   }
 
   body {
-    margin: 0;
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #dceeff, #ffffff);
-    min-height: 100vh;
+    background: linear-gradient(135deg, #e6f0ff, #ffffff);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-x: hidden;
+    min-height: 100vh;
+    margin: 0;
   }
 
   .container {
     background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(12px);
     border-radius: 20px;
-    box-shadow: 0 10px 25px var(--shadow);
     padding: 30px;
-    width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     max-width: 450px;
+    width: 90%;
     text-align: center;
-    animation: fadeUp 0.8s ease;
+    animation: fadeUp 0.7s ease;
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
   }
 
   h2 {
     color: var(--blue);
-    margin-bottom: 18px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    margin-bottom: 20px;
   }
 
   label {
     display: block;
     text-align: left;
-    font-weight: 600;
     margin: 10px 0 6px;
-    color: #444;
+    font-weight: 600;
+    color: #333;
   }
 
   input, select {
     width: 100%;
     padding: 12px;
-    border-radius: 12px;
+    border-radius: 10px;
     border: 2px solid var(--light-blue);
-    background: #f7fbff;
     font-size: 1rem;
-    outline: none;
+    background: #f9fbff;
   }
 
   input:focus, select:focus {
@@ -82,7 +77,7 @@
     background: var(--blue);
     color: var(--white);
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 14px;
     font-weight: 700;
     cursor: pointer;
@@ -96,126 +91,132 @@
   }
 
   .result {
+    display: none;
     margin-top: 20px;
-    padding: 18px;
     background: #f0f8ff;
     border: 2px solid var(--blue);
-    border-radius: 14px;
-    display: none;
+    border-radius: 12px;
+    padding: 15px;
     animation: fadeIn 0.6s ease;
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
   }
 
   .result h3 {
     color: var(--blue);
-    margin-bottom: 10px;
   }
 
   .amount {
     font-size: 1.3rem;
     font-weight: 600;
     color: #0f5ed7;
-    margin: 5px 0;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 480px) {
     .container {
       padding: 22px;
-    }
-    h2 {
-      font-size: 1.3rem;
-    }
-    input, select, button {
-      font-size: 0.95rem;
     }
   }
 </style>
 </head>
 <body>
 
-  <div class="container">
-    <h2>Currency Converter</h2>
+<div class="container">
+  <h2>Currency Converter</h2>
 
-    <label for="amount">Enter Amount</label>
-    <input type="number" id="amount" placeholder="Enter amount">
+  <label for="amount">Enter Amount</label>
+  <input type="number" id="amount" placeholder="Enter amount" />
 
-    <label for="fromCurrency">From Currency</label>
-    <select id="fromCurrency"></select>
+  <label for="fromCurrency">From Currency</label>
+  <select id="fromCurrency"></select>
 
-    <label for="toCurrency">To Currency</label>
-    <select id="toCurrency"></select>
+  <label for="toCurrency">To Currency</label>
+  <select id="toCurrency"></select>
 
-    <button id="convertBtn">Convert</button>
+  <button id="convertBtn">Convert</button>
 
-    <div id="result" class="result">
-      <h3>Conversion Result</h3>
-      <div class="amount" id="convertedAmount">0.00</div>
-    </div>
+  <div id="result" class="result">
+    <h3>Conversion Result</h3>
+    <div class="amount" id="convertedAmount">0.00</div>
   </div>
+</div>
 
 <script>
-  const currencies = {
-    "USD": "US Dollar",
-    "PKR": "Pakistani Rupee",
-    "EUR": "Euro",
-    "GBP": "British Pound",
-    "INR": "Indian Rupee",
-    "JPY": "Japanese Yen",
-    "CNY": "Chinese Yuan",
-    "SAR": "Saudi Riyal",
-    "AED": "UAE Dirham",
-    "CAD": "Canadian Dollar",
-    "AUD": "Australian Dollar",
-  };
+const currencies = {
+  "USD": "US Dollar",
+  "PKR": "Pakistani Rupee",
+  "EUR": "Euro",
+  "GBP": "British Pound",
+  "INR": "Indian Rupee",
+  "JPY": "Japanese Yen",
+  "CNY": "Chinese Yuan",
+  "SAR": "Saudi Riyal",
+  "AED": "UAE Dirham",
+  "CAD": "Canadian Dollar",
+  "AUD": "Australian Dollar",
+};
 
-  const fromSelect = document.getElementById("fromCurrency");
-  const toSelect = document.getElementById("toCurrency");
-  const amountInput = document.getElementById("amount");
-  const resultDiv = document.getElementById("result");
-  const convertedAmount = document.getElementById("convertedAmount");
+const fromSelect = document.getElementById("fromCurrency");
+const toSelect = document.getElementById("toCurrency");
+const amountInput = document.getElementById("amount");
+const resultDiv = document.getElementById("result");
+const convertedAmount = document.getElementById("convertedAmount");
 
-  // Populate currency dropdowns
-  Object.entries(currencies).forEach(([code, name]) => {
-    const option1 = document.createElement("option");
-    const option2 = document.createElement("option");
-    option1.value = code;
-    option2.value = code;
-    option1.textContent = `${name} (${code})`;
-    option2.textContent = `${name} (${code})`;
-    fromSelect.appendChild(option1);
-    toSelect.appendChild(option2);
-  });
+// Populate dropdowns
+Object.entries(currencies).forEach(([code, name]) => {
+  const opt1 = document.createElement("option");
+  const opt2 = document.createElement("option");
+  opt1.value = code;
+  opt2.value = code;
+  opt1.textContent = `${name} (${code})`;
+  opt2.textContent = `${name} (${code})`;
+  fromSelect.appendChild(opt1);
+  toSelect.appendChild(opt2);
+});
+fromSelect.value = "USD";
+toSelect.value = "PKR";
 
-  fromSelect.value = "USD";
-  toSelect.value = "PKR";
+document.getElementById("convertBtn").addEventListener("click", async () => {
+  const amount = parseFloat(amountInput.value);
+  const from = fromSelect.value;
+  const to = toSelect.value;
 
-  document.getElementById("convertBtn").addEventListener("click", async () => {
-    const amount = parseFloat(amountInput.value);
-    const from = fromSelect.value;
-    const to = toSelect.value;
+  if (!amount || amount <= 0) {
+    alert("Please enter a valid amount");
+    return;
+  }
 
-    if (!amount || amount <= 0) {
-      alert("Please enter a valid amount");
-      return;
-    }
+  // API 1: ExchangeRate.host
+  const api1 = `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`;
+  // API 2: Frankfurter.app (backup)
+  const api2 = `https://api.frankfurter.app/latest?from=${from}&to=${to}`;
 
-    const apiUrl = `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`;
+  try {
+    let response = await fetch(api1);
+    let data = await response.json();
 
+    if (!data.result) throw new Error("Primary API failed");
+
+    const result = data.result.toFixed(2);
+    convertedAmount.textContent = `${amount} ${from} = ${result} ${to}`;
+    resultDiv.style.display = "block";
+  } catch {
     try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      const result = data.result.toFixed(2);
+      let response = await fetch(api2);
+      let data = await response.json();
 
+      const rate = data.rates[to];
+      const result = (rate * amount).toFixed(2);
       convertedAmount.textContent = `${amount} ${from} = ${result} ${to}`;
       resultDiv.style.display = "block";
-    } catch (error) {
-      alert("Error fetching exchange rate. Please try again later.");
+    } catch {
+      alert("❌ Unable to fetch exchange rates. Please try again later.");
     }
-  });
+  }
+});
 </script>
 
 </body>
