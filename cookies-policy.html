@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cookies Policy - Tool Tap</title>
+<link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
+<style>
+  :root {
+    --primary: #1677ff;
+    --secondary: #00c6ff;
+    --bg1: #e6f0ff;
+    --bg2: #ffffff;
+    --text: #222831;
+    --card-shadow: rgba(0,0,0,0.08);
+    --card-radius: 18px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Poppins", sans-serif; }
+
+  html, body { height: 100%; }
+
+  /* Animated gradient background */
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(120deg, var(--bg1), var(--bg2), var(--bg1));
+    background-size: 200% 200%;
+    animation: gradientShift 7s ease-in-out infinite alternate;
+    z-index: -2;
+  }
+
+  /* Gentle bottom wave */
+  body::after{
+    content:"";
+    position: fixed;
+    left: -25%;
+    bottom: -40px;
+    width: 150%;
+    height: 220px;
+    background: radial-gradient(circle at 50% 10%, rgba(22,118,255,0.10) 0%, transparent 45%);
+    transform: translateZ(0);
+    animation: waveMove 9s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes gradientShift{
+    0% { background-position: 0% 50%;}
+    100% { background-position: 100% 50%;}
+  }
+  @keyframes waveMove{
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-30%); }
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    color: var(--text);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 920px;
+    background: #ffffff;
+    border-radius: var(--card-radius);
+    box-shadow: 0 12px 40px var(--card-shadow);
+    padding: 34px;
+    animation: cardIn 0.7s cubic-bezier(.2,.9,.2,1);
+    backdrop-filter: blur(6px);
+  }
+
+  @keyframes cardIn {
+    from { transform: translateY(22px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+
+  .brand {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(22,119,255,0.12);
+  }
+
+  h1 {
+    color: var(--primary);
+    font-size: 1.6rem;
+    margin: 0;
+  }
+
+  p.lead {
+    margin-top: 8px;
+    color: #475569;
+    font-size: 0.98rem;
+  }
+
+  section.content {
+    margin-top: 18px;
+    line-height: 1.7;
+    color: #374151;
+    font-size: 1rem;
+  }
+
+  h2 {
+    color: var(--secondary);
+    margin-top: 22px;
+    margin-bottom: 8px;
+    position: relative;
+    font-size: 1.1rem;
+  }
+  h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 48px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 6px;
+  }
+
+  ul { margin-left: 18px; margin-bottom: 12px; }
+  li { margin-bottom: 8px; }
+
+  .note {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #f8fbff, #ffffff);
+    border: 1px solid rgba(22,119,255,0.06);
+    color: #374151;
+    font-size: 0.95rem;
+  }
+
+  footer {
+    margin-top: 22px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 700px) {
+    .container { padding: 22px; }
+    h1 { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+  <main class="container" role="main" aria-labelledby="pageTitle">
+    <header>
+      <div class="brand">Tool Tap</div>
+      <div>
+        <h1 id="pageTitle">Cookies Policy</h1>
+        <p class="lead">How Tool Tap uses cookies and similar technologies to improve your experience.</p>
+      </div>
+    </header>
+
+    <section class="content" aria-describedby="summary">
+      <p id="summary"><strong>Effective date:</strong> January 1, 2025</p>
+
+      <h2>1. What are cookies?</h2>
+      <p>Cookies are small text files placed on your device by websites you visit. They help the site remember information about your visit and improve your experience.</p>
+
+      <h2>2. Why Tool Tap uses cookies</h2>
+      <p>Tool Tap uses cookies and similar technologies for the following purposes:</p>
+      <ul>
+        <li><strong>Essential functionality:</strong> To enable core site features (for example, keeping you on the correct tool page or preserving UI preferences).</li>
+        <li><strong>Performance & analytics:</strong> To aggregate anonymous usage statistics so we can improve tools and fix bugs faster.</li>
+        <li><strong>Preferences:</strong> To remember UI choices like theme, language, or tool settings on your next visit.</li>
+      </ul>
+
+      <h2>3. Types of cookies we use</h2>
+      <ul>
+        <li><strong>Strictly necessary cookies</strong> — Required for site operation and cannot be disabled in our system.</li>
+        <li><strong>Performance cookies</strong> — Collect anonymous usage data to help us improve speed and reliability.</li>
+        <li><strong>Functional cookies</strong> — Store user preferences to provide a smoother experience.</li>
+      </ul>
+
+      <h2>4. Third-party cookies</h2>
+      <p>We may use trusted third-party services (for example, analytics providers) that set cookies to help measure site usage and performance. These third parties have their own privacy policies and controls.</p>
+
+      <h2>5. How to manage cookies</h2>
+      <p>You can control or delete cookies through your browser settings. Most browsers allow you to:</p>
+      <ul>
+        <li>View cookies stored on your device.</li>
+        <li>Delete specific cookies or all cookies.</li>
+        <li>Block or restrict cookies from third parties.</li>
+      </ul>
+      <p>Note: Blocking or deleting cookies may affect site functionality and some tools may not work correctly.</p>
+
+      <h2>6. Data retention</h2>
+      <p>Cookies are retained for different durations depending on their purpose (session vs. persistent cookies). We aim to keep cookie usage minimal and privacy-friendly.</p>
+
+      <h2>7. Children</h2>
+      <p>Tool Tap is not intended for children under 13. We do not knowingly collect personal data from children.</p>
+
+      <div class="note">
+        <strong>Quick summary:</strong> Tool Tap uses minimal cookies focused on functionality and analytics. Most processing happens locally in your browser — nothing sensitive is shared unless you explicitly use a third-party integration.
+      </div>
+
+      <h2>8. Changes to this Cookies Policy</h2>
+      <p>We may update this Cookies Policy periodically. The page's effective date will be updated when changes are made. Please check back to stay informed.</p>
+
+      <h2>9. Contact</h2>
+      <p>Questions about our Cookies Policy? Contact us at <a href="mailto:moosafaisal880@gmail.com">moosafaisal880@gmail.com</a>.</p>
+    </section>
+
+    <footer>© 2025 Tool Tap. All Rights Reserved.</footer>
+  </main>
+</body>
+</html>
