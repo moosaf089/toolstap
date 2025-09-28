@@ -1,97 +1,292 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" href="favicon_io\favicon-16x16.png" type="image/x-icon">
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Text Reverse Tool</title>
-<style>
-  :root{
-    --blue:#1677ff; --white:#ffffff; --muted:#5b6b8a; --soft:#eef4ff;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(#f0f7ff,#ffffff);padding:16px;display:flex;justify-content:center}
-  .container{width:100%;max-width:980px;background:var(--white);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.08);padding:18px;display:grid;gap:14px}
-  .header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  h1{margin:0;color:#fff;background:var(--blue);padding:10px 14px;border-radius:10px;font-size:1.25rem}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  textarea{width:100%;min-height:260px;padding:12px;border:2px solid var(--blue);border-radius:12px;resize:vertical;font-size:15px;line-height:1.45}
-  .btns{display:flex;gap:10px;flex-wrap:wrap}
-  button, select{background:var(--blue);color:#fff;border:none;padding:10px 12px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px}
-  select{font-weight:500}
-  .ghost{background:var(--soft);color:var(--muted)}
-  .toast{position:fixed;bottom:12px;left:0;right:0;margin:auto;width:fit-content;background:#0f5ed7;color:#fff;padding:8px 12px;border-radius:10px;opacity:0;transform:translateY(8px);transition:.25s}
-  .toast.show{opacity:1;transform:translateY(0)}
-  @media (max-width:900px){.grid{grid-template-columns:1fr}}
-  @media (max-width:520px){textarea{min-height:200px}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Text Reverser — Tool Tap</title>
+  <link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
+
+  <style>
+    :root{
+      --blue:#1677ff; --blue-dark:#0f5ed7; --bg:#f5f9ff; --muted:#5b6b8a;
+      --white:#fff; --radius:16px; --shadow: 0 12px 30px rgba(13,46,98,0.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#fff)}
+    .wrap{max-width:920px;margin:36px auto;padding:22px;background:var(--white);border-radius:20px;box-shadow:var(--shadow);animation:cardIn .5s ease both}
+    @keyframes cardIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+    .header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+    .brand{background:linear-gradient(90deg,var(--blue),var(--blue-dark));color:#fff;padding:10px 14px;border-radius:10px;font-weight:700}
+    h1{font-size:1.25rem;margin:0;color:#0b2338}
+    p.lead{margin:6px 0 0;color:var(--muted);font-size:0.95rem}
+
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-top:18px}
+    @media(max-width:980px){.grid{grid-template-columns:1fr}}
+
+    /* Editor */
+    .card-left{display:flex;flex-direction:column;gap:12px}
+    textarea.input{width:100%;min-height:260px;padding:14px;border-radius:12px;border:2px solid rgba(22,119,255,0.08);background:#f7fbff;font-size:15px;line-height:1.5;outline:none;transition:box-shadow .18s}
+    textarea.input:focus{box-shadow:0 10px 30px rgba(22,119,255,0.08);border-color:var(--blue-dark)}
+
+    .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .left-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+    .select{padding:10px 12px;border-radius:10px;border:2px solid rgba(22,119,255,0.08);background:#fff;outline:none}
+    .btn{background:var(--blue);color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(22,119,255,0.12);transition:transform .16s,box-shadow .16s}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(22,119,255,0.18)}
+    .btn.ghost{background:transparent;color:var(--blue);border:2px solid rgba(22,119,255,0.12);font-weight:600}
+
+    .tiny{font-size:0.88rem;color:var(--muted)}
+
+    /* Side panel */
+    .card-right{display:flex;flex-direction:column;gap:12px}
+    .panel{background:linear-gradient(180deg,#fff,#fbfdff);padding:14px;border-radius:12px;border:1px solid rgba(16,64,160,0.03)}
+    .panel .title{font-weight:700;color:var(--blue-dark);margin-bottom:8px}
+    .preview{min-height:160px;max-height:360px;overflow:auto;padding:10px;border-radius:10px;border:1px dashed rgba(22,119,255,0.06);background:#fcfeff;color:#08304f;white-space:pre-wrap}
+    .stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .stat{background:var(--bg);padding:10px;border-radius:10px;min-width:120px;text-align:center;color:var(--blue-dark);font-weight:700}
+    .actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+    .link{color:var(--blue);text-decoration:none;font-weight:600}
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:0.9rem}
+
+    /* micro animations */
+    .flash{animation:flashC .28s ease}
+    @keyframes flashC{0%{transform:translateY(-6px)}100%{transform:none}}
+
+    @media(max-width:520px){
+      .brand{display:none}
+      textarea.input{min-height:180px}
+      .card-right{order:2}
+    }
+  </style>
 </head>
 <body>
-  <div class="container" role="application" aria-label="Text Reverse Tool">
+  <main class="wrap" role="main" aria-labelledby="title">
     <div class="header">
-      <h1>Text Reverse Tool</h1>
-      <div class="btns">
-        <select id="mode">
-          <option value="text">Reverse Entire Text</option>
-          <option value="word">Reverse Each Word</option>
-          <option value="line">Reverse Each Line</option>
-        </select>
-        <button id="reverseBtn">Reverse</button>
-        <button id="copyBtn" class="ghost">Copy Output</button>
-        <button id="clearBtn" class="ghost">Clear</button>
+      <div class="brand">Tool Tap</div>
+      <div>
+        <h1 id="title">Text Reverser</h1>
+        <p class="lead">Reverse entire text, each word, or each line. Clean UI — same style as other tools.</p>
       </div>
     </div>
 
-    <div class="grid">
-      <div>
-        <label for="input">Input</label>
-        <textarea id="input" placeholder="Paste or type your text here..."></textarea>
-      </div>
-      <div>
-        <label for="output">Output</label>
-        <textarea id="output" readonly placeholder="Reversed text will appear here."></textarea>
-      </div>
-    </div>
-  </div>
+    <section class="grid">
+      <!-- left editor -->
+      <div class="card-left">
+        <textarea id="inputText" class="input" placeholder="Type or paste text here..."></textarea>
 
-  <div id="toast" class="toast" role="status" aria-live="polite">Copied!</div>
+        <div class="controls" role="toolbar" aria-label="Actions">
+          <div class="left-controls">
+            <label class="tiny" for="mode">Reverse mode</label>
+            <select id="mode" class="select" aria-label="Select reverse mode">
+              <option value="full">Reverse entire text</option>
+              <option value="words">Reverse each word</option>
+              <option value="lines">Reverse each line</option>
+            </select>
+            <label class="tiny" for="preserveSpaces" style="margin-left:8px"><input id="preserveSpaces" type="checkbox" checked /> Preserve spacing</label>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center">
+            <button id="reverseBtn" class="btn">Reverse</button>
+            <button id="clearBtn" class="btn ghost">Clear</button>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+          <div class="tiny muted">Pro tip: For multi-line reversal choose "Reverse each line".</div>
+          <div>
+            <button id="copyBtn" class="btn ghost">Copy</button>
+            <button id="downloadBtn" class="btn" style="display:none">Download</button>
+          </div>
+        </div>
+
+        <div class="footer">Tool Tap © 2025</div>
+      </div>
+
+      <!-- right preview -->
+      <aside class="card-right" aria-label="Preview and stats">
+        <div class="panel" aria-live="polite">
+          <div class="title">Preview</div>
+          <div id="preview" class="preview">Reversed text will appear here — hit Reverse.</div>
+
+          <div class="stats" aria-hidden="false" style="margin-top:12px">
+            <div class="stat">Chars: <span id="charCount">0</span></div>
+            <div class="stat">Words: <span id="wordCount">0</span></div>
+            <div class="stat">Lines: <span id="lineCount">0</span></div>
+          </div>
+
+          <div class="actions">
+            <a id="copyPreview" class="link" href="#" tabindex="0">Copy preview</a>
+            <a id="downloadPreview" class="link" href="#" style="margin-left:auto;display:none">Ready to download</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="title">How it works</div>
+          <div class="muted" style="font-size:0.95rem">
+            • <strong>Reverse entire text</strong>: flips every character order.<br>
+            • <strong>Reverse each word</strong>: word positions stay, letters in each word reverse.<br>
+            • <strong>Reverse each line</strong>: lines stay in same order, characters in each line reverse.<br>
+            • Use "Preserve spacing" to keep original spacing where possible.
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
 
 <script>
-  const $ = (s)=>document.querySelector(s);
-  const input = $('#input');
-  const output = $('#output');
-  const reverseBtn = $('#reverseBtn');
-  const copyBtn = $('#copyBtn');
-  const clearBtn = $('#clearBtn');
-  const toast = $('#toast');
-  const mode = $('#mode');
+  const inputText = document.getElementById('inputText');
+  const mode = document.getElementById('mode');
+  const preserveSpaces = document.getElementById('preserveSpaces');
+  const reverseBtn = document.getElementById('reverseBtn');
+  const clearBtn = document.getElementById('clearBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
 
-  function reverseText(){
-    const text = input.value;
-    let result = '';
-    if(mode.value === 'text'){
-      result = text.split('').reverse().join('');
-    } else if(mode.value === 'word'){
-      result = text.split(/(\s+)/).map(w => w.trim()? w.split('').reverse().join('') : w).join('');
-    } else if(mode.value === 'line'){
-      result = text.split(/\r?\n/).map(line => line.split('').reverse().join('')).join('\n');
-    }
-    output.value = result;
+  const preview = document.getElementById('preview');
+  const charCount = document.getElementById('charCount');
+  const wordCount = document.getElementById('wordCount');
+  const lineCount = document.getElementById('lineCount');
+  const copyPreview = document.getElementById('copyPreview');
+  const downloadPreview = document.getElementById('downloadPreview');
+
+  let latestOutput = '';
+
+  function reverseString(s){
+    return s.split('').reverse().join('');
   }
 
-  reverseBtn.addEventListener('click', reverseText);
+  function reverseWordsPreserveSpacing(text){
+    // preserves spacing between words when checked
+    if(preserveSpaces.checked){
+      // match words and spaces
+      return text.split(/(\s+)/).map(part => {
+        return /\s+/.test(part) ? part : reverseString(part);
+      }).join('');
+    } else {
+      return text.split(/\s+/).map(w => reverseString(w)).join(' ');
+    }
+  }
 
-  copyBtn.addEventListener('click', async ()=>{
-    if(!output.value) return;
-    try{ await navigator.clipboard.writeText(output.value); showToast('Copied output'); }
-    catch{ output.select(); document.execCommand('copy'); showToast('Copied'); }
+  function processReverse(){
+    const txt = inputText.value;
+    if(!txt.trim()){
+      preview.textContent = 'No text provided — paste or type something.';
+      flash(preview);
+      updateStats('');
+      return;
+    }
+
+    let out = '';
+    const m = mode.value;
+    if(m === 'full'){
+      out = reverseString(txt);
+    } else if(m === 'words'){
+      out = reverseWordsPreserveSpacing(txt);
+    } else if(m === 'lines'){
+      const lines = txt.split(/\r?\n/);
+      const processed = lines.map(ln => {
+        if(preserveSpaces.checked){
+          // preserve spacing within line
+          return ln.split(/(\s+)/).map(p => /\s+/.test(p) ? p : reverseString(p)).join('');
+        } else {
+          return ln.split(/\s+/).map(w => reverseString(w)).join(' ');
+        }
+      });
+      out = processed.join('\n');
+    }
+
+    latestOutput = out;
+    preview.textContent = out;
+    updateStats(out);
+
+    // prepare download
+    const blob = new Blob([out], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    downloadPreview.href = url;
+    downloadPreview.download = 'reversed.txt';
+    downloadPreview.style.display = 'inline';
+    downloadBtn.style.display = 'inline-block';
+    // small animation
+    flash(preview);
+  }
+
+  function updateStats(text){
+    const t = text || '';
+    charCount.textContent = t.length;
+    wordCount.textContent = (t.trim() ? (t.match(/\b\S+\b/g) || []).length : 0);
+    lineCount.textContent = t ? t.split(/\r?\n/).length : 0;
+  }
+
+  function flash(el){
+    el.classList.remove('flash');
+    void el.offsetWidth;
+    el.classList.add('flash');
+  }
+
+  reverseBtn.addEventListener('click', () => {
+    reverseBtn.disabled = true;
+    reverseBtn.style.transform = 'scale(0.98)';
+    setTimeout(()=>{ reverseBtn.style.transform = ''; reverseBtn.disabled = false }, 160);
+    processReverse();
   });
 
-  clearBtn.addEventListener('click', ()=>{ input.value=''; output.value=''; });
+  clearBtn.addEventListener('click', () => {
+    inputText.value = '';
+    preview.textContent = 'Reversed text will appear here — hit Reverse.';
+    latestOutput = '';
+    updateStats('');
+    downloadPreview.style.display = 'none';
+    downloadBtn.style.display = 'none';
+  });
 
-  function showToast(msg){
-    toast.textContent = msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 1200);
-  }
+  copyBtn.addEventListener('click', async () => {
+    const text = inputText.value;
+    if(!text) { flash(inputText); return; }
+    try{
+      await navigator.clipboard.writeText(text);
+      copyBtn.textContent = 'Copied!';
+      setTimeout(()=> copyBtn.textContent = 'Copy', 1200);
+    }catch(e){
+      copyBtn.textContent = 'Copied';
+      setTimeout(()=> copyBtn.textContent = 'Copy', 1200);
+    }
+  });
+
+  copyPreview.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if(!latestOutput) { flash(preview); return; }
+    try{
+      await navigator.clipboard.writeText(latestOutput);
+      copyPreview.textContent = 'Copied ✓';
+      setTimeout(()=> copyPreview.textContent = 'Copy preview', 1200);
+    }catch(e){
+      copyPreview.textContent = 'Copied';
+      setTimeout(()=> copyPreview.textContent = 'Copy preview', 1200);
+    }
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    if(!latestOutput) { flash(preview); return; }
+    // create temporary link and click (also handled by downloadPreview)
+    const a = document.createElement('a');
+    a.href = downloadPreview.href;
+    a.download = downloadPreview.download;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+
+  // enable Ctrl+Enter to reverse quickly
+  inputText.addEventListener('keydown', (e)=>{
+    if(e.ctrlKey && e.key === 'Enter') { processReverse(); }
+  });
+
+  // init
+  updateStats('');
 </script>
 </body>
 </html>
