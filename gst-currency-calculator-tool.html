@@ -1,267 +1,178 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Currency Converter — Tool Tap (fixed)</title>
-<link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
-<style>
-  :root{
-    --blue:#1677ff; --soft:#eef6ff; --card:#fff;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
-    font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
-    background:linear-gradient(180deg,#f0f7ff,#ffffff);
-    padding:20px;
-  }
-  .card{
-    width:100%; max-width:520px; background:var(--card); border-radius:14px; padding:22px;
-    box-shadow:0 10px 30px rgba(12,45,100,0.08);
-  }
-  h1{margin:0 0 8px;color:var(--blue)}
-  p.lead{margin:0 0 16px;color:#54657a}
-  .row{display:flex;gap:10px;align-items:center;margin-bottom:10px}
-  input,select,button{font-size:15px;padding:10px;border-radius:10px;border:1px solid #dfe9ff}
-  input[type="number"]{flex:1}
-  select{flex:1}
-  button{background:var(--blue);color:#fff;border:none;cursor:pointer}
-  button.ghost{background:transparent;color:var(--blue);border:1px solid rgba(22,119,255,0.12)}
-  .result{margin-top:14px;padding:12px;border-radius:10px;background:#f4fbff;border:1px solid rgba(22,119,255,0.06);display:none}
-  .status{font-weight:700;color:var(--blue);margin-bottom:6px}
-  pre.log{background:#0b1220;color:#dfefff;padding:10px;border-radius:8px;overflow:auto;max-height:160px;font-size:13px}
-  .hint{margin-top:12px;font-size:13px;color:#475569}
-  .footer{margin-top:14px;font-size:13px;color:#7b8794}
-  @media(max-width:540px){.row{flex-direction:column} input,select{width:100%}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter - Tool Tap</title>
+  <link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #1d2671, #c33764);
+      color: white;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(40px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    select {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    option { color: black; }
+
+    button {
+      background: #00c6ff;
+      background: linear-gradient(45deg, #0072ff, #00c6ff);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #00ffcc;
+      min-height: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+        width: 90%;
+      }
+      h1 { font-size: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
-  <main class="card" role="main" aria-labelledby="title">
-    <h1 id="title">Currency Converter — Tool Tap</h1>
-    <p class="lead">Enter amount, pick From → To and press Convert. If something fails the UI will show details so you (and I) can actually fix it.</p>
 
-    <div class="row">
-      <input id="amount" type="number" placeholder="Amount (e.g. 100)" min="0" step="any" />
-      <button id="swap" class="ghost" title="Swap currencies">⇄</button>
-    </div>
+  <div class="container">
+    <h1>💱 Currency Converter</h1>
+    <input type="number" id="amount" placeholder="Enter amount">
+    <select id="fromCurrency"></select>
+    <select id="toCurrency"></select>
+    <button onclick="convertCurrency()">Convert</button>
+    <div class="result" id="result"></div>
+  </div>
 
-    <div class="row">
-      <select id="fromCur" aria-label="From currency"></select>
-      <select id="toCur" aria-label="To currency"></select>
-    </div>
+  <script>
+    const fromSelect = document.getElementById("fromCurrency");
+    const toSelect = document.getElementById("toCurrency");
+    const result = document.getElementById("result");
 
-    <div class="row">
-      <button id="convert">Convert</button>
-      <button id="test" class="ghost">Test Connection</button>
-    </div>
-
-    <div id="result" class="result" role="status" aria-live="polite">
-      <div class="status" id="statusText"></div>
-      <div id="outputText"></div>
-    </div>
-
-    <div style="margin-top:12px">
-      <details>
-        <summary style="cursor:pointer;font-weight:700;color:#324a66">Debug logs (open if conversion fails)</summary>
-        <pre class="log" id="log">Logs will appear here...</pre>
-      </details>
-    </div>
-
-    <p class="hint">If you get "Unable to fetch" or network/CORS errors: open browser console (F12 → Console) and/or run the file via a tiny local server (instructions below).</p>
-
-    <div class="footer">
-      <strong>Run locally (if you opened the file with file://):</strong>
-      <ul>
-        <li>Python 3: <code>python3 -m http.server 8000</code> then open <code>http://localhost:8000/</code></li>
-        <li>Node (no install): <code>npx http-server . -p 8000</code></li>
-        <li>VSCode: use Live Server extension</li>
-      </ul>
-    </div>
-  </main>
-
-<script>
-/*
-  Robust single-file currency converter:
-   - Loads currency list from frankfurter (fast + CORS friendly).
-   - convert() tries frankfurter first, then exchangerate.host as fallback.
-   - Shows detailed logs for debugging (and helps you understand why "fetch" fails).
-*/
-
-const apiFrank = 'https://api.frankfurter.app';
-const apiExHost = 'https://api.exchangerate.host';
-
-const fromSel = document.getElementById('fromCur');
-const toSel   = document.getElementById('toCur');
-const amount  = document.getElementById('amount');
-const convertBtn = document.getElementById('convert');
-const testBtn = document.getElementById('test');
-const resultBox = document.getElementById('result');
-const statusText = document.getElementById('statusText');
-const outputText = document.getElementById('outputText');
-const logEl = document.getElementById('log');
-const swapBtn = document.getElementById('swap');
-
-function log(...args){
-  console.groupCollapsed?.('Currency debug') // not required
-  const ts = new Date().toLocaleTimeString();
-  logEl.textContent = `${ts} — ${args.map(a => (typeof a === 'object' ? JSON.stringify(a) : String(a))).join(' | ')}\n` + logEl.textContent;
-  console.log(...args);
-}
-
-// Fill dropdowns: try Frankfurter currencies endpoint; fallback to hard list
-async function loadCurrencies(){
-  fromSel.innerHTML = ''; toSel.innerHTML = '';
-  try{
-    log('Loading currencies from frankfurter...');
-    const r = await fetch(`${apiFrank}/currencies`);
-    if(!r.ok) throw new Error('Frankfurter currencies fetch failed: ' + r.status);
-    const data = await r.json();
-    for(const [code, name] of Object.entries(data)){
-      const o1 = new Option(`${name} (${code})`, code);
-      const o2 = new Option(`${name} (${code})`, code);
-      fromSel.add(o1);
-      toSel.add(o2);
-    }
-    // sensible defaults
-    fromSel.value = 'USD';
-    toSel.value = 'PKR';
-    log('Loaded', Object.keys(data).length, 'currencies from frankfurter');
-  }catch(err){
-    log('Frankfurter load failed', err.message);
-    // fallback small list so UI isn't empty
-    const fallback = {
-      "USD":"US Dollar","EUR":"Euro","PKR":"Pakistani Rupee","INR":"Indian Rupee",
-      "GBP":"British Pound","AUD":"Australian Dollar","CAD":"Canadian Dollar","JPY":"Japanese Yen"
+    // ✅ Currency List
+    const currencies = {
+      USD: "United States Dollar",
+      EUR: "Euro",
+      GBP: "British Pound",
+      PKR: "Pakistani Rupee",
+      INR: "Indian Rupee",
+      AUD: "Australian Dollar",
+      CAD: "Canadian Dollar",
+      AED: "UAE Dirham",
+      SAR: "Saudi Riyal",
+      JPY: "Japanese Yen",
+      CNY: "Chinese Yuan",
+      CHF: "Swiss Franc",
+      TRY: "Turkish Lira",
+      KWD: "Kuwaiti Dinar",
+      BDT: "Bangladeshi Taka",
+      LKR: "Sri Lankan Rupee"
     };
-    for(const [code, name] of Object.entries(fallback)){
-      fromSel.add(new Option(`${name} (${code})`, code));
-      toSel.add(new Option(`${name} (${code})`, code));
+
+    for (let code in currencies) {
+      const option1 = document.createElement("option");
+      option1.value = code;
+      option1.text = `${code} - ${currencies[code]}`;
+      fromSelect.appendChild(option1);
+
+      const option2 = document.createElement("option");
+      option2.value = code;
+      option2.text = `${code} - ${currencies[code]}`;
+      toSelect.appendChild(option2);
     }
-    fromSel.value = 'USD';
-    toSel.value = 'PKR';
-    log('Used fallback currency list');
-  }
-}
 
-// Try Frankfurter API (CORS-friendly). If it works, use data.rates[to]
-// If fails, try exchangerate.host convert endpoint (data.result)
-async function convert(){
-  resultBox.style.display = 'block';
-  statusText.textContent = 'Converting...';
-  outputText.textContent = '';
-  const a = parseFloat(amount.value);
-  const from = fromSel.value;
-  const to = toSel.value;
-  log('Convert requested', { amount: a, from, to });
+    fromSelect.value = "USD";
+    toSelect.value = "PKR";
 
-  if(!a || a <= 0){ statusText.textContent = 'Please enter valid amount'; return; }
+    async function convertCurrency() {
+      const amount = document.getElementById("amount").value;
+      const from = fromSelect.value;
+      const to = toSelect.value;
 
-  // helper to format result and logs
-  const showResult = (text)=>{ statusText.textContent = 'Success'; outputText.textContent = text; log('Result used:', text) };
-
-  // 1) frankfurter
-  try{
-    const u = `${apiFrank}/latest?amount=${encodeURIComponent(a)}&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`;
-    log('Trying frankfurter:', u);
-    const r = await fetch(u, { cache: 'no-store' });
-    log('Frankfurter response status', r.status);
-    if(r.ok){
-      const j = await r.json();
-      log('Frankfurter JSON', j);
-      // frankfurter returns object.rates[to] with converted amount when amount param provided
-      if(j && j.rates && j.rates[to] != null){
-        showResult(`${a} ${from} = ${Number(j.rates[to]).toFixed(2)} ${to}  (source: Frankfurter)`);
+      if (!amount || amount <= 0) {
+        result.textContent = "Please enter a valid amount.";
         return;
-      } else {
-        log('Frankfurter response missing expected rates field', j);
-        // fall through to fallback
       }
-    } else {
-      log('Frankfurter returned non-ok status', r.status);
-    }
-  }catch(e){
-    log('Frankfurter fetch error', e.message || e);
-  }
 
-  // 2) exchangerate.host fallback
-  try{
-    const u2 = `${apiExHost}/convert?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&amount=${encodeURIComponent(a)}`;
-    log('Trying exchangerate.host:', u2);
-    const r2 = await fetch(u2, { cache: 'no-store' });
-    log('exchangerate.host response status', r2.status);
-    if(r2.ok){
-      const j2 = await r2.json();
-      log('exchangerate.host JSON', j2);
-      if(j2 && (j2.result != null)){
-        showResult(`${a} ${from} = ${Number(j2.result).toFixed(2)} ${to}  (source: exchangerate.host)`);
-        return;
-      } else if (j2 && j2.rates && j2.rates[to] != null){
-        // some endpoints return rates object
-        const converted = j2.rates[to];
-        showResult(`${a} ${from} = ${Number(converted).toFixed(2)} ${to}  (source: exchangerate.host/rates)`);
-        return;
-      } else {
-        log('exchangerate.host missing result/rates', j2);
+      result.textContent = "Converting...";
+
+      try {
+        const response = await fetch(`https://api.exchangerate.host/convert?from=${from}&to=${to}`);
+        const data = await response.json();
+
+        if (data.result) {
+          const converted = (amount * data.info.rate).toFixed(2);
+          result.innerHTML = `${amount} ${from} = <br> <strong>${converted} ${to}</strong>`;
+        } else {
+          throw new Error("Conversion failed");
+        }
+      } catch {
+        result.textContent = "⚠️ Failed to fetch exchange rates. Please try again.";
       }
-    } else {
-      log('exchangerate.host returned non-ok status', r2.status);
     }
-  }catch(e){
-    log('exchangerate.host fetch error', e.message || e);
-  }
+  </script>
 
-  // both failed — show helpful tip
-  statusText.textContent = 'Unable to fetch exchange rates';
-  outputText.textContent = `Both APIs failed. Check console or logs above. Common fixes:\n` +
-    `• Open this file via a local server (python -m http.server) instead of file://\n` +
-    `• Disable aggressive adblocker / privacy extension that can block requests\n` +
-    `• Try a different browser (Chrome/Edge/Firefox)\n` +
-    `Logs (top) show raw error info.`;
-  log('Both APIs failed — user notified');
-}
-
-// quick test button: test both endpoints and show HTTP status
-async function testConnection(){
-  logEl.textContent = ''; // clear earlier logs
-  resultBox.style.display = 'block';
-  statusText.textContent = 'Testing endpoints...';
-  outputText.textContent = '';
-  try{
-    // test frankfurter currencies endpoint
-    const t1 = await fetch(`${apiFrank}/currencies`);
-    log('Frankfurter /currencies status', t1.status);
-    // test frankfurter convert 1 USD->USD
-    const t1b = await fetch(`${apiFrank}/latest?amount=1&from=USD&to=EUR`);
-    log('Frankfurter convert status', t1b.status);
-    // test exchangerate.host
-    const t2 = await fetch(`${apiExHost}/convert?from=USD&to=EUR&amount=1`);
-    log('exchangerate.host convert status', t2.status);
-
-    statusText.textContent = 'Test complete — see logs below';
-    outputText.textContent = 'If any of the requests showed non-200, the API may be temporarily unavailable or your network is blocking outgoing requests.';
-  }catch(e){
-    statusText.textContent = 'Test failed';
-    outputText.textContent = 'Test failed — network error. Check browser console and run locally via a small server.';
-    log('Test error', e.message || e);
-  }
-}
-
-// swap currencies
-swapBtn.addEventListener('click', ()=> {
-  const f = fromSel.value;
-  fromSel.value = toSel.value;
-  toSel.value = f;
-});
-
-// attach buttons
-convertBtn.addEventListener('click', convert);
-testBtn.addEventListener('click', testConnection);
-
-// initial load
-loadCurrencies();
-log('UI ready — loadCurrencies() triggered');
-
-</script>
 </body>
 </html>
