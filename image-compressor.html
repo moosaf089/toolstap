@@ -1309,7 +1309,7 @@
             reader.readAsDataURL(file);
         }
 
-        // Compress Images - FIXED VERSION
+        // Compress Images
         function compressImages() {
             if (uploadedFiles.length === 0) return;
             
@@ -1332,9 +1332,8 @@
                     // Calculate new dimensions if needed (maintain aspect ratio)
                     let width = img.width;
                     let height = img.height;
-                    
-                    // For better compression, we can optionally resize very large images
                     const maxDimension = 2000;
+                    
                     if (width > maxDimension || height > maxDimension) {
                         if (width > height) {
                             height = Math.round((height * maxDimension) / width);
@@ -1351,56 +1350,52 @@
                     // Draw image on canvas
                     ctx.drawImage(img, 0, 0, width, height);
                     
-                    // Get quality value (0.1 to 1.0)
+                    // Get compressed data URL
                     const quality = parseInt(qualitySlider.value) / 100;
+                    const dataURL = canvas.toDataURL(file.type, quality);
                     
-                    // Convert to blob with proper quality setting
-                    canvas.toBlob((blob) => {
-                        if (!blob) {
-                            console.error('Failed to compress image');
-                            processed++;
-                            if (processed === uploadedFiles.length) {
-                                compressBtn.disabled = false;
-                                compressBtn.innerHTML = '<i class="fas fa-compress-alt"></i> Compress Images';
-                            }
-                            return;
-                        }
-                        
-                        // Create file from blob
-                        const compressedFile = new File([blob], file.name, { type: blob.type });
-                        
-                        // Add to compressed files array
-                        compressedFiles.push(compressedFile);
-                        totalCompressedBytes += compressedFile.size;
-                        
-                        // Update preview
-                        document.getElementById(`compressedSize-${index}`).textContent = 
-                            `Compressed: ${formatFileSize(compressedFile.size)}`;
-                        
-                        const originalSize = file.size;
-                        const compressedSize = compressedFile.size;
-                        const savings = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
-                        
-                        document.getElementById(`savings-${index}`).textContent = 
-                            `Savings: ${savings}%`;
-                        
-                        // Update preview image with compressed version
-                        const previewImg = previewContainer.children[index].querySelector('.preview-image');
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            previewImg.src = e.target.result;
-                        };
-                        reader.readAsDataURL(compressedFile);
-                        
-                        // Check if all files are processed
-                        processed++;
-                        if (processed === uploadedFiles.length) {
-                            compressBtn.disabled = false;
-                            compressBtn.innerHTML = '<i class="fas fa-compress-alt"></i> Compress Images';
-                            downloadBtn.disabled = false;
-                            updateStats();
-                        }
-                    }, file.type, quality);
+                    // Convert data URL to blob
+                    const byteString = atob(dataURL.split(',')[1]);
+                    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+                    const ab = new ArrayBuffer(byteString.length);
+                    const ia = new Uint8Array(ab);
+                    
+                    for (let i = 0; i < byteString.length; i++) {
+                        ia[i] = byteString.charCodeAt(i);
+                    }
+                    
+                    const blob = new Blob([ab], { type: mimeString });
+                    
+                    // Create file from blob
+                    const compressedFile = new File([blob], file.name, { type: file.type });
+                    
+                    // Add to compressed files array
+                    compressedFiles.push(compressedFile);
+                    totalCompressedBytes += compressedFile.size;
+                    
+                    // Update preview
+                    document.getElementById(`compressedSize-${index}`).textContent = 
+                        `Compressed: ${formatFileSize(compressedFile.size)}`;
+                    
+                    const originalSize = file.size;
+                    const compressedSize = compressedFile.size;
+                    const savings = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
+                    
+                    document.getElementById(`savings-${index}`).textContent = 
+                        `Savings: ${savings}%`;
+                    
+                    // Update preview image with compressed version
+                    const previewImg = previewContainer.children[index].querySelector('.preview-image');
+                    previewImg.src = dataURL;
+                    
+                    // Check if all files are processed
+                    processed++;
+                    if (processed === uploadedFiles.length) {
+                        compressBtn.disabled = false;
+                        compressBtn.innerHTML = '<i class="fas fa-compress-alt"></i> Compress Images';
+                        downloadBtn.disabled = false;
+                        updateStats();
+                    }
                 };
                 
                 img.src = URL.createObjectURL(file);
