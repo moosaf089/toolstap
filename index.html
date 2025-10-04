@@ -7,17 +7,17 @@
     
     <!-- Enhanced SEO Meta Tags -->
     <meta name="google-site-verification" content="PASTE_YOUR_VERIFICATION_CODE_HERE" />
-    <meta name="description" content="ToolsTap – Free online tools for PDF conversion, image editing, text utilities, QR code scanner, and calculators. Fast, secure, mobile-friendly tools in one place.">
-    <meta name="keywords" content="online tools, PDF converter, image compressor, text tools, QR code scanner, calculator, free tools">
+    <meta name="description" content="ToolsTap – Free online tools for PDF conversion, image editing, text utilities, and calculators. Fast, secure, mobile-friendly tools in one place.">
+    <meta name="keywords" content="online tools, PDF converter, image compressor, text tools, calculator, free tools">
     <link rel="canonical" href="https://toolstap.com/">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="ToolsTap – Free Online Tools for PDF, Images, Text, QR Scanner & Calculators">
-    <meta property="og:description" content="Convert, compress, scan QR codes, and calculate with free tools by ToolsTap. Simple and powerful online utilities.">
+    <meta property="og:title" content="ToolsTap – Free Online Tools for PDF, Images, Text & Calculators">
+    <meta property="og:description" content="Convert, compress, and calculate with free tools by ToolsTap. Simple and powerful online utilities.">
     <meta property="og:image" content="https://toolstap.com/og-image.png">
     <meta property="og:url" content="https://toolstap.com/">
     <meta name="twitter:card" content="summary_large_image">
     
-    <title>ToolsTap - Free Online Tools for PDF, Images, Text, QR Scanner & Calculators</title>
+    <title>ToolsTap - Free Online Tools for PDF, Images, Text & Calculators</title>
     
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -869,7 +869,7 @@
                     <i class="fas fa-calculator"></i>
                 </div>
                 <div class="tool-icon">
-                    <i class="fas fa-qrcode"></i>
+                    <i class="fas fa-code"></i>
                 </div>
             </div>
         </div>
@@ -879,7 +879,7 @@
     <section class="search-section">
         <div class="search-container container">
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search for a tool... (e.g. PDF converter, image compressor, QR scanner)" aria-label="Search tools">
+                <input type="text" id="searchInput" placeholder="Search for a tool... (e.g. PDF converter, image compressor)" aria-label="Search tools">
                 <button type="submit" id="searchButton" aria-label="Search">
                     <i class="fas fa-search"></i>
                 </button>
@@ -896,45 +896,7 @@
             <button class="category-tab" data-category="document">Document Tools</button>
             <button class="category-tab" data-category="calculator">Calculators</button>
             <button class="category-tab" data-category="text">Text Tools</button>
-            <button class="category-tab" data-category="qr">QR Tools</button>
         </div>
-        
-        <!-- QR Code Tools -->
-        <section class="section" id="qr-tools">
-            <div class="section-title">
-                <h2><i class="fas fa-qrcode"></i> QR Code Tools</h2>
-                <p>Scan, generate and manage QR codes for all your needs. Fast, accurate and completely free.</p>
-            </div>
-            
-            <div class="tools-grid" id="qr-tools-grid">
-                <div class="tool-card" data-category="qr">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <h3>QR Code Scanner</h3>
-                    <p>Scan QR codes directly from your camera or uploaded images. Fast and accurate detection with instant results.</p>
-                    <a href="qr-scanner.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="qr">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-qrcode"></i>
-                    </div>
-                    <h3>QR Code Generator</h3>
-                    <p>Create custom QR codes for URLs, text, contacts, WiFi, and more. Customize colors and download in high quality.</p>
-                    <a href="qr-generator.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="qr">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-barcode"></i>
-                    </div>
-                    <h3>Barcode Scanner</h3>
-                    <p>Scan various barcode formats including UPC, EAN, Code 128 and more. Perfect for product identification.</p>
-                    <a href="barcode-scanner.html" class="btn">Use Tool</a>
-                </div>
-            </div>
-        </section>
         
         <!-- Image Tools -->
         <section class="section" id="tools">
@@ -1041,25 +1003,71 @@
                     </div>
                     <h3>Document Converter</h3>
                     <p>Convert between DOCX, PPTX, XLSX, ODT and other document formats. Preserve formatting and layout.</p>
-                    <a href="document-converter.html" class="btn">Use Tool</a>
+                    <a href="document-converter-tool.html" class="btn">Use Tool</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Calculator Tools -->
+        <section class="section">
+            <div class="section-title">
+                <h2><i class="fas fa-calculator"></i> Calculator Tools</h2>
+                <p>Perform various calculations for personal and professional needs. Accurate, fast, and easy to use.</p>
+            </div>
+            
+            <div class="tools-grid" id="calculator-tools">
+                <div class="tool-card" data-category="calculator">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-square-root-alt"></i>
+                    </div>
+                    <h3>Scientific Calculator</h3>
+                    <p>Advanced calculator with scientific, engineering and mathematical functions. Memory functions included.</p>
+                    <a href="scientific-calculator.html" class="btn">Use Tool</a>
                 </div>
                 
-                <div class="tool-card" data-category="document">
+                <div class="tool-card" data-category="calculator">
                     <div class="tool-icon-small">
-                        <i class="fas fa-lock"></i>
+                        <i class="fas fa-birthday-cake"></i>
                     </div>
-                    <h3>PDF Password Remover</h3>
-                    <p>Remove password protection from PDF files quickly and securely. No software installation needed.</p>
-                    <a href="pdf-password-remover.html" class="btn">Use Tool</a>
+                    <h3>Age Calculator</h3>
+                    <p>Calculate age from birth date to current date in years, months and days. Find days until next birthday.</p>
+                    <a href="age-calculator-tool.html" class="btn">Use Tool</a>
                 </div>
                 
-                <div class="tool-card" data-category="document">
+                <div class="tool-card" data-category="calculator">
                     <div class="tool-icon-small">
-                        <i class="fas fa-lock"></i>
+                        <i class="fas fa-weight"></i>
                     </div>
-                    <h3>PDF Password Protector</h3>
-                    <p>Add password protection to your PDF files to prevent unauthorized access and sharing.</p>
-                    <a href="pdf-password-protector.html" class="btn">Use Tool</a>
+                    <h3>BMI Calculator</h3>
+                    <p>Calculate your Body Mass Index and check your weight category. Get personalized health recommendations.</p>
+                    <a href="bmi-calculator-tool.html" class="btn">Use Tool</a>
+                </div>
+                
+                <div class="tool-card" data-category="calculator">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Loan EMI Calculator</h3>
+                    <p>Calculate Equated Monthly Installments for home, car or personal loans. Compare different loan options.</p>
+                    <a href="loan-emi-calculator-tool.html" class="btn">Use Tool</a>
+                </div>
+                
+                <div class="tool-card" data-category="calculator">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3>GST Calculator</h3>
+                    <p>Calculate Goods and Services Tax amounts with different tax slabs. Suitable for businesses and individuals.</p>
+                    <a href="gst-calculator-converter.html" class="btn">Use Tool</a>
+                </div>
+                
+                <div class="tool-card" data-category="calculator">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Currency Converter</h3>
+                    <p>Convert between world currencies with live exchange rates. Historical data and conversion charts available.</p>
+                    <a href="gst-currency-calculator-tool.html" class="btn">Use Tool</a>
                 </div>
             </div>
         </section>
@@ -1068,7 +1076,7 @@
         <section class="section">
             <div class="section-title">
                 <h2><i class="fas fa-font"></i> Text Tools</h2>
-                <p>Manipulate, analyze and transform text with our comprehensive text utilities. All processing is done locally for privacy.</p>
+                <p>Manipulate and analyze text with our powerful text utilities. All processing happens locally for privacy.</p>
             </div>
             
             <div class="tools-grid" id="text-tools">
@@ -1076,9 +1084,27 @@
                     <div class="tool-icon-small">
                         <i class="fas fa-text-height"></i>
                     </div>
-                    <h3>Case Converter</h3>
-                    <p>Convert text between uppercase, lowercase, title case, sentence case and more with one click.</p>
-                    <a href="case-converter.html" class="btn">Use Tool</a>
+                    <h3>Text Case Converter</h3>
+                    <p>Convert text between uppercase, lowercase, title case and sentence case. Preserve proper nouns.</p>
+                    <a href="text-case-converter-tool.html" class="btn">Use Tool</a>
+                </div>
+                
+                <div class="tool-card" data-category="text">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-sort-amount-down"></i>
+                    </div>
+                    <h3>Word & Character Counter</h3>
+                    <p>Count words, characters, sentences and paragraphs with detailed stats. Reading time estimates.</p>
+                    <a href="word-counter-tool.html" class="btn">Use Tool</a>
+                </div>
+                
+                <div class="tool-card" data-category="text">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3>Remove Duplicate Lines</h3>
+                    <p>Clean your text by removing duplicate lines while preserving order. Case-sensitive and insensitive options.</p>
+                    <a href="duplicate-line-remover.html" class="btn">Use Tool</a>
                 </div>
                 
                 <div class="tool-card" data-category="text">
@@ -1086,124 +1112,42 @@
                         <i class="fas fa-sort-alpha-down"></i>
                     </div>
                     <h3>Text Sorter</h3>
-                    <p>Sort lines of text alphabetically, reverse order, remove duplicates, or shuffle randomly.</p>
-                    <a href="text-sorter.html" class="btn">Use Tool</a>
+                    <p>Sort lines of text alphabetically or numerically in ascending/descending order. Remove empty lines.</p>
+                    <a href="text-shortner-tool.html" class="btn">Use Tool</a>
                 </div>
                 
                 <div class="tool-card" data-category="text">
                     <div class="tool-icon-small">
-                        <i class="fas fa-search"></i>
+                        <i class="fas fa-undo"></i>
                     </div>
-                    <h3>Text Diff Checker</h3>
-                    <p>Compare two texts to find differences, changes, or duplicates. Perfect for editing and version control.</p>
-                    <a href="text-diff-checker.html" class="btn">Use Tool</a>
+                    <h3>Text Reverser</h3>
+                    <p>Reverse text, words or character order for creative or coding purposes. Multiple reversal options.</p>
+                    <a href="text-reverser.html" class="btn">Use Tool</a>
                 </div>
                 
                 <div class="tool-card" data-category="text">
                     <div class="tool-icon-small">
-                        <i class="fas fa-ruler"></i>
+                        <i class="fas fa-lock"></i>
                     </div>
-                    <h3>Character Counter</h3>
-                    <p>Count characters, words, sentences, paragraphs and estimate reading time for any text.</p>
-                    <a href="character-counter.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="text">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-key"></i>
-                    </div>
-                    <h3>Password Generator</h3>
-                    <p>Create strong, secure passwords with customizable length, character types and complexity.</p>
-                    <a href="password-generator.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="text">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-language"></i>
-                    </div>
-                    <h3>Language Translator</h3>
-                    <p>Translate text between multiple languages with support for over 100 languages and dialects.</p>
-                    <a href="language-translator.html" class="btn">Use Tool</a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Calculators -->
-        <section class="section">
-            <div class="section-title">
-                <h2><i class="fas fa-calculator"></i> Calculators</h2>
-                <p>Perform various calculations from basic math to specialized financial and conversion calculators.</p>
-            </div>
-            
-            <div class="tools-grid" id="calculator-tools">
-                <div class="tool-card" data-category="calculator">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <h3>Basic Calculator</h3>
-                    <p>Perform basic arithmetic operations with a clean, easy-to-use calculator interface.</p>
-                    <a href="basic-calculator.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="calculator">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-percentage"></i>
-                    </div>
-                    <h3>Percentage Calculator</h3>
-                    <p>Calculate percentages, percentage increase/decrease, and percentage of numbers easily.</p>
-                    <a href="percentage-calculator.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="calculator">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-ruler"></i>
-                    </div>
-                    <h3>Unit Converter</h3>
-                    <p>Convert between different units of length, weight, volume, temperature, and more.</p>
-                    <a href="unit-converter.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="calculator">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <h3>Age Calculator</h3>
-                    <p>Calculate age in years, months, days, or find the time difference between two dates.</p>
-                    <a href="age-calculator.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="calculator">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                    <h3>Currency Converter</h3>
-                    <p>Convert between world currencies with up-to-date exchange rates from reliable sources.</p>
-                    <a href="currency-converter.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="calculator">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Time Calculator</h3>
-                    <p>Add, subtract, or calculate time differences between dates and times with precision.</p>
-                    <a href="time-calculator.html" class="btn">Use Tool</a>
+                    <h3>Text Encryptor/Decryptor</h3>
+                    <p>Encrypt and decrypt text with secure algorithms for privacy protection. Multiple encryption methods.</p>
+                    <a href="text-encrypter-decrypter.html" class="btn">Use Tool</a>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <div class="container">
             <div class="footer-container">
                 <div class="footer-about">
                     <a href="#" class="footer-logo">Tools<span>Tap</span></a>
-                    <p>ToolsTap provides a comprehensive collection of free online tools to simplify your daily tasks. From document conversion to image editing, we've got you covered.</p>
+                    <p>Simplifying your digital life with powerful, easy-to-use tools for all your needs. Our mission is to provide free, high-quality online tools that make your work easier. All tools work directly in your browser.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/moosa.faisal.338/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/tools_tap/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
@@ -1211,135 +1155,92 @@
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#tools">All Tools</a></li>
-                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Home</a></li>
                         <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#tools">All Tools</a></li>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="terms-and-condition.html">Terms of Use</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-links">
-                    <h3>Popular Tools</h3>
+                    <h3>Tool Categories</h3>
                     <ul>
-                        <li><a href="qr-scanner.html">QR Code Scanner</a></li>
-                        <li><a href="image-converter.html">Image Converter</a></li>
-                        <li><a href="pdf-to-word.html">PDF to Word</a></li>
-                        <li><a href="password-generator.html">Password Generator</a></li>
-                        <li><a href="unit-converter.html">Unit Converter</a></li>
-                        <li><a href="text-diff-checker.html">Text Diff Checker</a></li>
+                        <li><a href="#image-tools">Image Tools</a></li>
+                        <li><a href="#document-tools">Document Tools</a></li>
+                        <li><a href="#calculator-tools">Calculators</a></li>
+                        <li><a href="#text-tools">Text Tools</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-contact">
                     <h3>Contact Us</h3>
                     <p><i class="fas fa-envelope"></i> <a href="mailto:moosafaisal880@gmail.com">moosafaisal880@gmail.com</a></p>
+                    <p><i class="fas fa-phone"></i> (+92-03108895446)</p>
                     <p><i class="fas fa-map-marker-alt"></i> Pakistan</p>
-                    <p><i class="fas fa-clock"></i> Available 24/7</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
                 <div class="footer-bottom-links">
                     <a href="privacy-policy.html">Privacy Policy</a>
-                    <a href="terms-of-service.html">Terms of Service</a>
-                    <a href="cookie-policy.html">Cookie Policy</a>
-                    <a href="sitemap.html">Sitemap</a>
+                    <a href="terms-and-condition.html">Terms of Use</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="cookies-policy.html">Cookie Policy</a>
                 </div>
-                <p>&copy; 2023 ToolsTap. All rights reserved.</p>
+                <p>&copy; 2025 ToolsTap. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Theme Toggle
+        // Theme Toggle Functionality
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = themeToggle.querySelector('i');
         
-        // Check for saved theme or prefer-color-scheme
-        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        if (savedTheme === 'dark') {
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        // Apply the saved theme on page load
+        if (currentTheme === 'dark') {
             document.body.classList.add('dark-mode');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
         }
         
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
+            
             if (document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
             } else {
                 localStorage.setItem('theme', 'light');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
             }
         });
-        
-        // Mobile Menu Toggle
+
+        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
         
         mobileMenuBtn.addEventListener('click', () => {
             mainNav.classList.toggle('active');
-            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
-            mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
         });
         
-        // Search Functionality
-        const searchInput = document.getElementById('searchInput');
-        const searchButton = document.getElementById('searchButton');
-        const toolCards = document.querySelectorAll('.tool-card');
-        const categoryTabs = document.querySelectorAll('.category-tab');
-        
-        function filterTools() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const activeCategory = document.querySelector('.category-tab.active').dataset.category;
-            
-            let hasResults = false;
-            
-            toolCards.forEach(card => {
-                const toolName = card.querySelector('h3').textContent.toLowerCase();
-                const toolDesc = card.querySelector('p').textContent.toLowerCase();
-                const toolCategory = card.dataset.category;
-                
-                const matchesSearch = toolName.includes(searchTerm) || toolDesc.includes(searchTerm);
-                const matchesCategory = activeCategory === 'all' || toolCategory === activeCategory;
-                
-                if (matchesSearch && matchesCategory) {
-                    card.classList.remove('hidden');
-                    hasResults = true;
-                } else {
-                    card.classList.add('hidden');
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                 }
-            });
-            
-            // Show no results message if needed
-            let noResultsMsg = document.querySelector('.no-results');
-            if (!hasResults) {
-                if (!noResultsMsg) {
-                    noResultsMsg = document.createElement('div');
-                    noResultsMsg.className = 'no-results';
-                    noResultsMsg.innerHTML = `
-                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.5;"></i>
-                        <h3>No tools found</h3>
-                        <p>Try adjusting your search or filter to find what you're looking for.</p>
-                    `;
-                    document.querySelector('.tools-grid').appendChild(noResultsMsg);
-                }
-            } else if (noResultsMsg) {
-                noResultsMsg.remove();
-            }
-        }
-        
-        searchInput.addEventListener('input', filterTools);
-        searchButton.addEventListener('click', filterTools);
-        
-        // Category Tabs
-        categoryTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                categoryTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                filterTools();
             });
         });
         
@@ -1347,38 +1248,170 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
+                
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
                 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 100,
+                        top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu if open
-                    if (mainNav.classList.contains('active')) {
-                        mainNav.classList.remove('active');
-                        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
-                    }
                 }
             });
         });
         
-        // Loading animation for buttons
-        document.querySelectorAll('.btn').forEach(button => {
+        // Category tab functionality
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const toolCards = document.querySelectorAll('.tool-card');
+        
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                // Show/hide tools based on category
+                toolCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                
+                // Show/hide sections based on visible tools
+                document.querySelectorAll('.tools-grid').forEach(section => {
+                    const visibleCards = section.querySelectorAll('.tool-card:not(.hidden)');
+                    if (visibleCards.length === 0) {
+                        section.classList.add('hidden');
+                    } else {
+                        section.classList.remove('hidden');
+                    }
+                });
+                
+                // Scroll to first visible section
+                const firstVisibleSection = document.querySelector('.tools-grid:not(.hidden)');
+                if (firstVisibleSection && category !== 'all') {
+                    window.scrollTo({
+                        top: firstVisibleSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const toolSections = document.querySelectorAll('.tools-grid');
+        
+        function filterTools() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                // Show all tools if search is empty
+                toolCards.forEach(card => card.classList.remove('hidden'));
+                toolSections.forEach(section => {
+                    section.classList.remove('hidden');
+                    section.querySelector('.no-results')?.remove();
+                });
+                return;
+            }
+            
+            let hasResults = false;
+            
+            toolCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                    hasResults = true;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            // Handle no results
+            toolSections.forEach(section => {
+                // Remove existing no-results messages
+                section.querySelector('.no-results')?.remove();
+                
+                // Check if section has any visible cards
+                const visibleCards = section.querySelectorAll('.tool-card:not(.hidden)');
+                if (visibleCards.length === 0) {
+                    section.classList.add('hidden');
+                } else {
+                    section.classList.remove('hidden');
+                }
+            });
+            
+            // If no results in any section, show message in first section
+            if (!hasResults) {
+                const firstSection = document.querySelector('.tools-grid');
+                firstSection.classList.remove('hidden');
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.textContent = `No tools found for "${searchTerm}". Try different keywords.`;
+                firstSection.appendChild(noResults);
+            }
+            
+            // Scroll to first visible section
+            const firstVisibleSection = document.querySelector('.tools-grid:not(.hidden)');
+            if (firstVisibleSection) {
+                window.scrollTo({
+                    top: firstVisibleSection.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        searchButton.addEventListener('click', filterTools);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                filterTools();
+            }
+        });
+        
+        // Add loading state to buttons for better UX
+        document.querySelectorAll('a.btn').forEach(button => {
             button.addEventListener('click', function(e) {
+                // Only add loading for internal tool links
                 if (this.getAttribute('href') && !this.getAttribute('href').startsWith('#')) {
                     const originalText = this.innerHTML;
                     this.innerHTML = '<span class="loading"></span> Loading...';
                     
+                    // Reset after a short delay (in a real app, this would be after the page loads)
                     setTimeout(() => {
                         this.innerHTML = originalText;
                     }, 1500);
                 }
             });
         });
+        
+        // Performance optimization: Lazy load images if any are added in the future
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
     </script>
 </body>
 </html>
