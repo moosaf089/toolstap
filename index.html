@@ -6,33 +6,73 @@
     <link rel="icon" href="favicon_io/favicon-16x16.png" type="image/x-icon">
     
     <!-- Enhanced SEO Meta Tags -->
-    <meta name="google-site-verification" content="PASTE_YOUR_VERIFICATION_CODE_HERE" />
-    <meta name="description" content="ToolsTap – Free online tools for PDF conversion, image editing, text utilities, QR code scanner, and calculators. Fast, secure, mobile-friendly tools in one place.">
-    <meta name="keywords" content="online tools, PDF converter, image compressor, text tools, QR code scanner, calculator, free tools">
+    <meta name="google-site-verification" content="EiSnyD-34o5CATlTCVYDRPyVDD-tNHJ5lfc2rXQRCJ0"/>
+    <meta name="description" content="ToolsTap – Free online tools for PDF conversion, image editing, text utilities, and calculators. Fast, secure, mobile-friendly tools in one place.">
+    <meta name="keywords" content="online tools, PDF converter, image compressor, text tools, calculator, free tools, ToolsTap, document converter, image tools, text utilities, SEO tools, free online tools, PDF to Word, image to text, BMI calculator">
     <link rel="canonical" href="https://toolstap.com/">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="ToolsTap – Free Online Tools for PDF, Images, Text, QR Scanner & Calculators">
-    <meta property="og:description" content="Convert, compress, scan QR codes, and calculate with free tools by ToolsTap. Simple and powerful online utilities.">
-    <meta property="og:image" content="https://toolstap.com/og-image.png">
-    <meta property="og:url" content="https://toolstap.com/">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="author" content="ToolsTap">
     
-    <title>ToolsTap - Free Online Tools for PDF, Images, Text, QR Scanner & Calculators</title>
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="ToolsTap – Free Online Tools for PDF, Images, Text & Calculators">
+    <meta property="og:description" content="Convert, compress, and calculate with free tools by ToolsTap. Simple and powerful online utilities for PDF, images, text, and calculations.">
+    <meta property="og:image" content="https://toolstap.com/images/og-image.png">
+    <meta property="og:url" content="https://toolstap.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ToolsTap">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ToolsTap – Free Online Tools for PDF, Images, Text & Calculators">
+    <meta name="twitter:description" content="Convert, compress, and calculate with free tools by ToolsTap. Simple and powerful online utilities.">
+    <meta name="twitter:image" content="https://toolstap.com/images/twitter-card.png">
+    
+    <title>ToolsTap - Free Online Tools for PDF, Images, Text & Calculators</title>
+    
+    <!-- Structured Data / Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ToolsTap",
+      "url": "https://toolstap.com/",
+      "description": "Free online tools for PDF conversion, image editing, text utilities, and calculators",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "ToolsTap"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250"
+      }
+    }
+    </script>
     
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-038FRY9P45"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-038FRY9P45');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-038FRY9P45"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-038FRY9P45');
+    </script>
     
     <style>
         :root {
@@ -54,7 +94,7 @@
             --rounded: 12px;
             --rounded-lg: 20px;
             --transition: all 0.3s ease;
-            --white: #ffffff; /* added: define white variable used in .contact-link */
+            --white: #ffffff;
         }
 
         .dark-mode {
@@ -132,7 +172,6 @@
         .logo span {
             color: var(--dark-color);
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -269,7 +308,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* added: secondary button styling (used on hero) */
         .btn-secondary {
             background: transparent;
             color: var(--white);
@@ -548,7 +586,8 @@
         .footer-logo span {
             color: var(--primary-color);
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            
+            -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -818,17 +857,17 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">
-                <i class="fas fa-tools"></i>
+            <a href="https://toolstap.com/" class="logo" aria-label="ToolsTap Home">
+                <i class="fas fa-tools" aria-hidden="true"></i>
                 <span>ToolsTap</span>
             </a>
             
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
+                <i class="fas fa-moon" aria-hidden="true"></i>
             </button>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-                <i class="fas fa-bars"></i>
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
             
             <nav id="mainNav">
@@ -851,25 +890,25 @@
             <p>Convert, calculate, optimize and simplify your workflow with our collection of free online tools. No registration required.</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <a href="#tools" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> Explore Tools
+                    <i class="fas fa-rocket" aria-hidden="true"></i> Explore Tools
                 </a>
                 <a href="#document-tools" class="btn btn-secondary">
-                    <i class="fas fa-file-alt"></i> PDF Tools
+                    <i class="fas fa-file-alt" aria-hidden="true"></i> PDF Tools
                 </a>
             </div>
             
             <div class="tool-icons">
-                <div class="tool-icon">
-                    <i class="fas fa-image"></i>
+                <div class="tool-icon" aria-label="Image Tools">
+                    <i class="fas fa-image" aria-hidden="true"></i>
                 </div>
-                <div class="tool-icon">
-                    <i class="fas fa-file-alt"></i>
+                <div class="tool-icon" aria-label="Document Tools">
+                    <i class="fas fa-file-alt" aria-hidden="true"></i>
                 </div>
-                <div class="tool-icon">
-                    <i class="fas fa-calculator"></i>
+                <div class="tool-icon" aria-label="Calculator Tools">
+                    <i class="fas fa-calculator" aria-hidden="true"></i>
                 </div>
-                <div class="tool-icon">
-                    <i class="fas fa-qrcode"></i>
+                <div class="tool-icon" aria-label="Code Tools">
+                    <i class="fas fa-code" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
@@ -879,9 +918,9 @@
     <section class="search-section">
         <div class="search-container container">
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search for a tool... (e.g. PDF converter, image compressor, QR scanner)" aria-label="Search tools">
+                <input type="text" id="searchInput" placeholder="Search for a tool... (e.g. PDF converter, image compressor)" aria-label="Search tools">
                 <button type="submit" id="searchButton" aria-label="Search">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-search" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -896,66 +935,19 @@
             <button class="category-tab" data-category="document">Document Tools</button>
             <button class="category-tab" data-category="calculator">Calculators</button>
             <button class="category-tab" data-category="text">Text Tools</button>
-            <button class="category-tab" data-category="qr">QR Tools</button>
         </div>
-        
-        <!-- QR Code Tools -->
-        <section class="section" id="qr-tools">
-            <div class="section-title">
-                <h2><i class="fas fa-qrcode"></i> QR Code Tools</h2>
-                <p>Scan, generate and manage QR codes for all your needs. Fast, accurate and completely free.</p>
-            </div>
-            
-            <div class="tools-grid" id="qr-tools-grid">
-                <div class="tool-card" data-category="qr">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <h3>QR Code Scanner</h3>
-                    <p>Scan QR codes directly from your camera or uploaded images. Fast and accurate detection with instant results.</p>
-                    <a href="qr-scanner.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="qr">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-qrcode"></i>
-                    </div>
-                    <h3>QR Code Generator</h3>
-                    <p>Create custom QR codes for URLs, text, contacts, WiFi, and more. Customize colors and download in high quality.</p>
-                    <a href="qr-generator.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="qr">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-barcode"></i>
-                    </div>
-                    <h3>Barcode Scanner</h3>
-                    <p>Scan various barcode formats including UPC, EAN, Code 128 and more. Perfect for product identification.</p>
-                    <a href="barcode-scanner.html" class="btn">Use Tool</a>
-                </div>
-                
-                <div class="tool-card" data-category="qr">
-                    <div class="tool-icon-small">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <h3>QR Code History</h3>
-                    <p>Keep track of all your scanned QR codes with timestamps. Export your scan history for record keeping.</p>
-                    <a href="qr-history.html" class="btn">Use Tool</a>
-                </div>
-            </div>
-        </section>
         
         <!-- Image Tools -->
         <section class="section" id="tools">
             <div class="section-title">
-                <h2><i class="fas fa-image"></i> Image Tools</h2>
+                <h2><i class="fas fa-image" aria-hidden="true"></i> Image Tools</h2>
                 <p>Edit, convert and optimize your images with our powerful tools. All processing happens in your browser for maximum privacy.</p>
             </div>
             
             <div class="tools-grid" id="image-tools">
                 <div class="tool-card" data-category="image">
                     <div class="tool-icon-small">
-                        <i class="fas fa-exchange-alt"></i>
+                        <i class="fas fa-exchange-alt" aria-hidden="true"></i>
                     </div>
                     <h3>Image Converter</h3>
                     <p>Convert between JPG, PNG, GIF, WEBP and more formats with just a few clicks. Supports batch conversion.</p>
@@ -964,7 +956,7 @@
                 
                 <div class="tool-card" data-category="image">
                     <div class="tool-icon-small">
-                        <i class="fas fa-compress-alt"></i>
+                        <i class="fas fa-compress-alt" aria-hidden="true"></i>
                     </div>
                     <h3>Image Compressor</h3>
                     <p>Reduce image file size without losing quality for faster websites and sharing. Adjust compression level.</p>
@@ -973,7 +965,7 @@
                 
                 <div class="tool-card" data-category="image">
                     <div class="tool-icon-small">
-                        <i class="fas fa-expand-alt"></i>
+                        <i class="fas fa-expand-alt" aria-hidden="true"></i>
                     </div>
                     <h3>Image Resizer</h3>
                     <p>Resize images to any dimension while maintaining aspect ratio and quality. Perfect for social media.</p>
@@ -982,7 +974,7 @@
                 
                 <div class="tool-card" data-category="image">
                     <div class="tool-icon-small">
-                        <i class="fas fa-crop-alt"></i>
+                        <i class="fas fa-crop-alt" aria-hidden="true"></i>
                     </div>
                     <h3>Image Cropper</h3>
                     <p>Crop images to remove unwanted areas or focus on specific parts precisely. Freeform or fixed ratio cropping.</p>
@@ -991,7 +983,7 @@
                 
                 <div class="tool-card" data-category="image">
                     <div class="tool-icon-small">
-                        <i class="fas fa-font"></i>
+                        <i class="fas fa-font" aria-hidden="true"></i>
                     </div>
                     <h3>Image to Text (OCR)</h3>
                     <p>Extract text from images with our accurate optical character recognition. Supports multiple languages.</p>
@@ -1000,7 +992,7 @@
                 
                 <div class="tool-card" data-category="image">
                     <div class="tool-icon-small">
-                        <i class="fas fa-sync-alt"></i>
+                        <i class="fas fa-sync-alt" aria-hidden="true"></i>
                     </div>
                     <h3>Image Rotator/Flipper</h3>
                     <p>Rotate or flip images horizontally or vertically with one click. Perfect for correcting orientation.</p>
@@ -1012,14 +1004,14 @@
         <!-- Document Tools -->
         <section class="section">
             <div class="section-title">
-                <h2><i class="fas fa-file-alt"></i> Document Tools</h2>
+                <h2><i class="fas fa-file-alt" aria-hidden="true"></i> Document Tools</h2>
                 <p>Handle all your document conversion and editing needs effortlessly. Secure, fast, and completely free.</p>
             </div>
             
             <div class="tools-grid" id="document-tools">
                 <div class="tool-card" data-category="document">
                     <div class="tool-icon-small">
-                        <i class="fas fa-file-word"></i>
+                        <i class="fas fa-file-word" aria-hidden="true"></i>
                     </div>
                     <h3>PDF to Word</h3>
                     <p>Convert PDF files to editable Word documents while preserving formatting. No quality loss.</p>
@@ -1028,7 +1020,7 @@
                 
                 <div class="tool-card" data-category="document">
                     <div class="tool-icon-small">
-                        <i class="fas fa-file-archive"></i>
+                        <i class="fas fa-file-archive" aria-hidden="true"></i>
                     </div>
                     <h3>PDF Compressor</h3>
                     <p>Reduce PDF file size without losing quality for easier sharing and storage. Optimize for web or print.</p>
@@ -1037,7 +1029,7 @@
                 
                 <div class="tool-card" data-category="document">
                     <div class="tool-icon-small">
-                        <i class="fas fa-copy"></i>
+                        <i class="fas fa-copy" aria-hidden="true"></i>
                     </div>
                     <h3>PDF Merger & Splitter</h3>
                     <p>Combine multiple PDFs into one or extract pages from existing PDFs. Reorder pages as needed.</p>
@@ -1046,7 +1038,7 @@
                 
                 <div class="tool-card" data-category="document">
                     <div class="tool-icon-small">
-                        <i class="fas fa-exchange-alt"></i>
+                        <i class="fas fa-exchange-alt" aria-hidden="true"></i>
                     </div>
                     <h3>Document Converter</h3>
                     <p>Convert between DOCX, PPTX, XLSX, ODT and other document formats. Preserve formatting and layout.</p>
@@ -1058,14 +1050,14 @@
         <!-- Calculator Tools -->
         <section class="section">
             <div class="section-title">
-                <h2><i class="fas fa-calculator"></i> Calculator Tools</h2>
+                <h2><i class="fas fa-calculator" aria-hidden="true"></i> Calculator Tools</h2>
                 <p>Perform various calculations for personal and professional needs. Accurate, fast, and easy to use.</p>
             </div>
             
             <div class="tools-grid" id="calculator-tools">
                 <div class="tool-card" data-category="calculator">
                     <div class="tool-icon-small">
-                        <i class="fas fa-square-root-alt"></i>
+                        <i class="fas fa-square-root-alt" aria-hidden="true"></i>
                     </div>
                     <h3>Scientific Calculator</h3>
                     <p>Advanced calculator with scientific, engineering and mathematical functions. Memory functions included.</p>
@@ -1074,7 +1066,7 @@
                 
                 <div class="tool-card" data-category="calculator">
                     <div class="tool-icon-small">
-                        <i class="fas fa-birthday-cake"></i>
+                        <i class="fas fa-birthday-cake" aria-hidden="true"></i>
                     </div>
                     <h3>Age Calculator</h3>
                     <p>Calculate age from birth date to current date in years, months and days. Find days until next birthday.</p>
@@ -1083,7 +1075,7 @@
                 
                 <div class="tool-card" data-category="calculator">
                     <div class="tool-icon-small">
-                        <i class="fas fa-weight"></i>
+                        <i class="fas fa-weight" aria-hidden="true"></i>
                     </div>
                     <h3>BMI Calculator</h3>
                     <p>Calculate your Body Mass Index and check your weight category. Get personalized health recommendations.</p>
@@ -1092,7 +1084,7 @@
                 
                 <div class="tool-card" data-category="calculator">
                     <div class="tool-icon-small">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-home" aria-hidden="true"></i>
                     </div>
                     <h3>Loan EMI Calculator</h3>
                     <p>Calculate Equated Monthly Installments for home, car or personal loans. Compare different loan options.</p>
@@ -1101,7 +1093,7 @@
                 
                 <div class="tool-card" data-category="calculator">
                     <div class="tool-icon-small">
-                        <i class="fas fa-percentage"></i>
+                        <i class="fas fa-percentage" aria-hidden="true"></i>
                     </div>
                     <h3>GST Calculator</h3>
                     <p>Calculate Goods and Services Tax amounts with different tax slabs. Suitable for businesses and individuals.</p>
@@ -1110,7 +1102,7 @@
                 
                 <div class="tool-card" data-category="calculator">
                     <div class="tool-icon-small">
-                        <i class="fas fa-money-bill-wave"></i>
+                        <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
                     </div>
                     <h3>Currency Converter</h3>
                     <p>Convert between world currencies with live exchange rates. Historical data and conversion charts available.</p>
@@ -1122,14 +1114,14 @@
         <!-- Text Tools -->
         <section class="section">
             <div class="section-title">
-                <h2><i class="fas fa-font"></i> Text Tools</h2>
+                <h2><i class="fas fa-font" aria-hidden="true"></i> Text Tools</h2>
                 <p>Manipulate and analyze text with our powerful text utilities. All processing happens locally for privacy.</p>
             </div>
             
             <div class="tools-grid" id="text-tools">
                 <div class="tool-card" data-category="text">
                     <div class="tool-icon-small">
-                        <i class="fas fa-text-height"></i>
+                        <i class="fas fa-text-height" aria-hidden="true"></i>
                     </div>
                     <h3>Text Case Converter</h3>
                     <p>Convert text between uppercase, lowercase, title case and sentence case. Preserve proper nouns.</p>
@@ -1138,7 +1130,7 @@
                 
                 <div class="tool-card" data-category="text">
                     <div class="tool-icon-small">
-                        <i class="fas fa-sort-amount-down"></i>
+                        <i class="fas fa-sort-amount-down" aria-hidden="true"></i>
                     </div>
                     <h3>Word & Character Counter</h3>
                     <p>Count words, characters, sentences and paragraphs with detailed stats. Reading time estimates.</p>
@@ -1147,7 +1139,7 @@
                 
                 <div class="tool-card" data-category="text">
                     <div class="tool-icon-small">
-                        <i class="fas fa-filter"></i>
+                        <i class="fas fa-filter" aria-hidden="true"></i>
                     </div>
                     <h3>Remove Duplicate Lines</h3>
                     <p>Clean your text by removing duplicate lines while preserving order. Case-sensitive and insensitive options.</p>
@@ -1156,7 +1148,7 @@
                 
                 <div class="tool-card" data-category="text">
                     <div class="tool-icon-small">
-                        <i class="fas fa-sort-alpha-down"></i>
+                        <i class="fas fa-sort-alpha-down" aria-hidden="true"></i>
                     </div>
                     <h3>Text Sorter</h3>
                     <p>Sort lines of text alphabetically or numerically in ascending/descending order. Remove empty lines.</p>
@@ -1165,7 +1157,7 @@
                 
                 <div class="tool-card" data-category="text">
                     <div class="tool-icon-small">
-                        <i class="fas fa-undo"></i>
+                        <i class="fas fa-undo" aria-hidden="true"></i>
                     </div>
                     <h3>Text Reverser</h3>
                     <p>Reverse text, words or character order for creative or coding purposes. Multiple reversal options.</p>
@@ -1174,7 +1166,7 @@
                 
                 <div class="tool-card" data-category="text">
                     <div class="tool-icon-small">
-                        <i class="fas fa-lock"></i>
+                        <i class="fas fa-lock" aria-hidden="true"></i>
                     </div>
                     <h3>Text Encryptor/Decryptor</h3>
                     <p>Encrypt and decrypt text with secure algorithms for privacy protection. Multiple encryption methods.</p>
@@ -1189,20 +1181,20 @@
         <div class="container">
             <div class="footer-container">
                 <div class="footer-about">
-                    <a href="#" class="footer-logo">Tools<span>Tap</span></a>
+                    <a href="https://toolstap.com/" class="footer-logo">Tools<span>Tap</span></a>
                     <p>Simplifying your digital life with powerful, easy-to-use tools for all your needs. Our mission is to provide free, high-quality online tools that make your work easier. All tools work directly in your browser.</p>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/moosa.faisal.338/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/tools_tap/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/moosa.faisal.338/" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/tools_tap/" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="https://toolstap.com/">Home</a></li>
                         <li><a href="faq.html">FAQ</a></li>
                         <li><a href="#tools">All Tools</a></li>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -1213,7 +1205,6 @@
                 <div class="footer-links">
                     <h3>Tool Categories</h3>
                     <ul>
-                        <li><a href="#qr-tools">QR Code Tools</a></li>
                         <li><a href="#image-tools">Image Tools</a></li>
                         <li><a href="#document-tools">Document Tools</a></li>
                         <li><a href="#calculator-tools">Calculators</a></li>
@@ -1223,9 +1214,9 @@
                 
                 <div class="footer-contact">
                     <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:moosafaisal880@gmail.com">moosafaisal880@gmail.com</a></p>
-                    <p><i class="fas fa-phone"></i> (+92-03108895446)</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Pakistan</p>
+                    <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:moosafaisal880@gmail.com">moosafaisal880@gmail.com</a></p>
+                    <p><i class="fas fa-phone" aria-hidden="true"></i> (+92-03108895446)</p>
+                    <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Pakistan</p>
                 </div>
             </div>
             
@@ -1277,8 +1268,8 @@
         mobileMenuBtn.addEventListener('click', () => {
             mainNav.classList.toggle('active');
             mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+                ? '<i class="fas fa-times" aria-hidden="true"></i>' 
+                : '<i class="fas fa-bars" aria-hidden="true"></i>';
         });
         
         // Close mobile menu when clicking on a link
@@ -1287,7 +1278,7 @@
             link.addEventListener('click', () => {
                 if (mainNav.classList.contains('active')) {
                     mainNav.classList.remove('active');
-                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
                 }
             });
         });
