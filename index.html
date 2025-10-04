@@ -7,17 +7,17 @@
     
     <!-- Enhanced SEO Meta Tags -->
     <meta name="google-site-verification" content="PASTE_YOUR_VERIFICATION_CODE_HERE" />
-    <meta name="description" content="ToolsTap – Free online tools for PDF conversion, image editing, text utilities, and calculators. Fast, secure, mobile-friendly tools in one place.">
-    <meta name="keywords" content="online tools, PDF converter, image compressor, text tools, calculator, free tools">
+    <meta name="description" content="ToolsTap – Free online tools for PDF conversion, image editing, text utilities, QR code scanner, and calculators. Fast, secure, mobile-friendly tools in one place.">
+    <meta name="keywords" content="online tools, PDF converter, image compressor, text tools, QR code scanner, calculator, free tools">
     <link rel="canonical" href="https://toolstap.com/">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="ToolsTap – Free Online Tools for PDF, Images, Text & Calculators">
-    <meta property="og:description" content="Convert, compress, and calculate with free tools by ToolsTap. Simple and powerful online utilities.">
+    <meta property="og:title" content="ToolsTap – Free Online Tools for PDF, Images, Text, QR Scanner & Calculators">
+    <meta property="og:description" content="Convert, compress, scan QR codes, and calculate with free tools by ToolsTap. Simple and powerful online utilities.">
     <meta property="og:image" content="https://toolstap.com/og-image.png">
     <meta property="og:url" content="https://toolstap.com/">
     <meta name="twitter:card" content="summary_large_image">
     
-    <title>ToolsTap - Free Online Tools for PDF, Images, Text & Calculators</title>
+    <title>ToolsTap - Free Online Tools for PDF, Images, Text, QR Scanner & Calculators</title>
     
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -869,7 +869,7 @@
                     <i class="fas fa-calculator"></i>
                 </div>
                 <div class="tool-icon">
-                    <i class="fas fa-code"></i>
+                    <i class="fas fa-qrcode"></i>
                 </div>
             </div>
         </div>
@@ -879,7 +879,7 @@
     <section class="search-section">
         <div class="search-container container">
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search for a tool... (e.g. PDF converter, image compressor)" aria-label="Search tools">
+                <input type="text" id="searchInput" placeholder="Search for a tool... (e.g. PDF converter, image compressor, QR scanner)" aria-label="Search tools">
                 <button type="submit" id="searchButton" aria-label="Search">
                     <i class="fas fa-search"></i>
                 </button>
@@ -896,7 +896,54 @@
             <button class="category-tab" data-category="document">Document Tools</button>
             <button class="category-tab" data-category="calculator">Calculators</button>
             <button class="category-tab" data-category="text">Text Tools</button>
+            <button class="category-tab" data-category="qr">QR Tools</button>
         </div>
+        
+        <!-- QR Code Tools -->
+        <section class="section" id="qr-tools">
+            <div class="section-title">
+                <h2><i class="fas fa-qrcode"></i> QR Code Tools</h2>
+                <p>Scan, generate and manage QR codes for all your needs. Fast, accurate and completely free.</p>
+            </div>
+            
+            <div class="tools-grid" id="qr-tools-grid">
+                <div class="tool-card" data-category="qr">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>QR Code Scanner</h3>
+                    <p>Scan QR codes directly from your camera or uploaded images. Fast and accurate detection with instant results.</p>
+                    <a href="qr-scanner.html" class="btn">Use Tool</a>
+                </div>
+                
+                <div class="tool-card" data-category="qr">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h3>QR Code Generator</h3>
+                    <p>Create custom QR codes for URLs, text, contacts, WiFi, and more. Customize colors and download in high quality.</p>
+                    <a href="qr-generator.html" class="btn">Use Tool</a>
+                </div>
+                
+                <div class="tool-card" data-category="qr">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-barcode"></i>
+                    </div>
+                    <h3>Barcode Scanner</h3>
+                    <p>Scan various barcode formats including UPC, EAN, Code 128 and more. Perfect for product identification.</p>
+                    <a href="barcode-scanner.html" class="btn">Use Tool</a>
+                </div>
+                
+                <div class="tool-card" data-category="qr">
+                    <div class="tool-icon-small">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>QR Code History</h3>
+                    <p>Keep track of all your scanned QR codes with timestamps. Export your scan history for record keeping.</p>
+                    <a href="qr-history.html" class="btn">Use Tool</a>
+                </div>
+            </div>
+        </section>
         
         <!-- Image Tools -->
         <section class="section" id="tools">
@@ -1166,6 +1213,7 @@
                 <div class="footer-links">
                     <h3>Tool Categories</h3>
                     <ul>
+                        <li><a href="#qr-tools">QR Code Tools</a></li>
                         <li><a href="#image-tools">Image Tools</a></li>
                         <li><a href="#document-tools">Document Tools</a></li>
                         <li><a href="#calculator-tools">Calculators</a></li>
@@ -1415,4 +1463,3 @@
     </script>
 </body>
 </html>
-
