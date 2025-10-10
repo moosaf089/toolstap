@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://toolstap.com/sitemap.xml
+
+Sitemap: https://moosaf089.github.io/toolstap/sitemap.xml
